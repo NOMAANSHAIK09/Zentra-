@@ -15,13 +15,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+
+
 from django.contrib import admin
 from django.urls import include, path
-from Zentra.views import index ,home 
+from Zentra.views import index ,home, login, signup , myorder, cart , wishlist, message , profile, storeprofile, checkout,checkout, addproduct
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     
     path("", index, name="index"),
-    path("/", home, name="home"),
+    path("login/", login, name="login"),
+    path("signup/", signup, name="signup"),
+    path("home/", home, name="home"),
+    path("myorder/", myorder, name="myorder"),
+    path("cart/", cart, name="cart"),
+    path("message/", message, name="message"),
+    path("profile/", profile, name="profile"),
+    path("wishlist/", wishlist, name="wishlist"),
+    path("storeprofile/", storeprofile, name="storeprofile"),
+    path("checkout/", checkout, name="checkout"),
+    path("addproduct/", addproduct, name="addproduct"),
 ]
