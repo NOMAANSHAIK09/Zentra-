@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zentra - Seller Products</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #eef0ff;
+
+            --text-dark: #111827;
+            --text-muted: #64748b;
+
+            --border: #e2e8f0;
+            --background: #f8fafc;
+
+            --success: #10b981;
+            --success-bg: #dff8ee;
+
+            --warning: #f59e0b;
+            --warning-bg: #fff1d6;
+        }
+
+
+        /* =========================
+           GLOBAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text-dark);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+            background: rgba(255, 255, 255, 0.98);
+
+            border-bottom: 1px solid var(--border);
+
+            position: sticky;
+            top: 0;
+
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            max-width: 1220px;
+            height: 100%;
+
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+
+            gap: 35px;
+        }
+
+
+        /* Logo */
+
+        .brand {
+            min-width: 200px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--text-dark);
+
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 10px;
+
+            background: var(--primary);
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* Search */
+
+        .navbar-search {
+            flex: 1;
+            max-width: 610px;
+
+            position: relative;
+        }
+
+        .navbar-search i {
+            position: absolute;
+
+            left: 18px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #64748b;
+        }
+
+        .navbar-search input {
+            width: 100%;
+            height: 44px;
+
+            border: 1px solid #dbe2ec;
+            border-radius: 10px;
+
+            padding: 0 20px 0 47px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            background: white;
+        }
+
+        .navbar-search input:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(99, 102, 241, 0.08);
+        }
+
+
+        /* Navigation */
+
+        .nav-links {
+            margin-left: auto;
+
+            display: flex;
+            align-items: center;
+
+            gap: 18px;
+        }
+
+        .nav-links > a:not(.nav-icon) {
+            color: var(--text-muted);
+
+            font-size: 15px;
+            font-weight: 500;
+
+            padding: 8px;
+        }
+
+        .nav-links > a:not(.nav-icon):hover {
+            color: var(--primary);
+        }
+
+
+        /* Navbar Icons */
+
+        .nav-icon {
+            width: 38px;
+            height: 38px;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #64748b;
+
+            border-radius: 10px;
+
+            transition: 0.2s;
+        }
+
+        .nav-icon:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .notification-badge {
+            position: absolute;
+
+            top: -3px;
+            right: -3px;
+
+            min-width: 18px;
+            height: 18px;
+
+            padding: 0 4px;
+
+            border-radius: 20px;
+
+            background: var(--primary);
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            border: 2px solid white;
+        }
+
+
+        /* Avatar */
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 2px solid #e5e7eb;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page-container {
+            max-width: 1220px;
+
+            margin: auto;
+
+            padding: 30px 0 80px;
+        }
+
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb {
+            margin-bottom: 25px;
+        }
+
+        .breadcrumb-item {
+            font-size: 14px;
+        }
+
+        .breadcrumb-item a {
+            color: #64748b;
+        }
+
+        .breadcrumb-item.active {
+            color: #111827;
+        }
+
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 30px;
+
+            font-weight: 700;
+
+            margin-bottom: 5px;
+
+            letter-spacing: -0.5px;
+        }
+
+        .listing-count {
+            color: #64748b;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           ADD PRODUCT BUTTON
+        ========================= */
+
+        .add-product-btn {
+            background: var(--primary);
+
+            border: none;
+
+            color: white;
+
+            padding: 10px 19px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            box-shadow:
+                0 4px 10px rgba(99, 102, 241, 0.2);
+
+            transition: 0.2s;
+        }
+
+        .add-product-btn:hover {
+            background: var(--primary-dark);
+
+            transform: translateY(-1px);
+
+            color: white;
+        }
+
+
+        /* =========================
+           PRODUCT TABLE
+        ========================= */
+
+        .products-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 1px 2px rgba(0, 0, 0, 0.02);
+        }
+
+
+        /* Table */
+
+        .products-table {
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        /* Table header */
+
+        .products-table thead {
+            background: #ffffff;
+        }
+
+        .products-table th {
+            height: 45px;
+
+            padding: 0 18px;
+
+            border-bottom: 1px solid var(--border);
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            font-weight: 500;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.3px;
+
+            text-align: left;
+        }
+
+
+        /* Table rows */
+
+        .products-table tbody tr {
+            height: 71px;
+
+            border-bottom: 1px solid var(--border);
+
+            transition: background 0.15s;
+        }
+
+        .products-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .products-table tbody tr:hover {
+            background: #fafbff;
+        }
+
+        .products-table td {
+            padding: 10px 18px;
+
+            font-size: 14px;
+
+            vertical-align: middle;
+        }
+
+
+        /* =========================
+           PRODUCT
+        ========================= */
+
+        .product-info {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+        .product-image {
+            width: 44px;
+            height: 44px;
+
+            object-fit: cover;
+
+            border-radius: 9px;
+
+            flex-shrink: 0;
+        }
+
+        .product-name {
+            font-size: 15px;
+
+            font-weight: 500;
+
+            color: #111827;
+        }
+
+
+        /* =========================
+           PRICE
+        ========================= */
+
+        .product-price {
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: #111827;
+        }
+
+
+        /* =========================
+           STOCK
+        ========================= */
+
+        .stock-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 500;
+        }
+
+        .stock-good {
+            background: var(--success-bg);
+
+            color: #10a879;
+        }
+
+        .stock-low {
+            background: var(--warning-bg);
+
+            color: #e89a08;
+        }
+
+        .stock-out {
+            background: #fff1d6;
+
+            color: #e89a08;
+        }
+
+
+        /* =========================
+           RATING
+        ========================= */
+
+        .rating {
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .actions {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 18px;
+        }
+
+        .action-btn {
+            border: none;
+
+            background: transparent;
+
+            padding: 5px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .edit-btn {
+            color: #111827;
+        }
+
+        .edit-btn:hover {
+            color: var(--primary);
+        }
+
+        .delete-btn {
+            color: #ef4444;
+        }
+
+        .delete-btn:hover {
+            color: #dc2626;
+
+            transform: scale(1.08);
+        }
+
+
+        /* =========================
+           SEARCH / FILTER BAR
+        ========================= */
+
+        .toolbar {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 15px;
+        }
+
+        .product-search {
+            width: 300px;
+
+            position: relative;
+        }
+
+        .product-search i {
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #94a3b8;
+        }
+
+        .product-search input {
+            width: 100%;
+
+            height: 40px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 9px;
+
+            padding-left: 40px;
+
+            outline: none;
+
+            font-size: 13px;
+        }
+
+        .product-search input:focus {
+            border-color: var(--primary);
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-content {
+            border: none;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 20px 22px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-title {
+            font-size: 19px;
+
+            font-weight: 600;
+        }
+
+        .modal-body {
+            padding: 22px;
+        }
+
+        .form-label {
+            font-size: 13px;
+
+            font-weight: 500;
+        }
+
+        .form-control {
+            border-color: var(--border);
+
+            border-radius: 8px;
+
+            height: 43px;
+
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(99,102,241,.08);
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 992px) {
+
+            .navbar-container {
+                padding: 0 20px;
+
+                gap: 15px;
+            }
+
+            .brand {
+                min-width: auto;
+            }
+
+            .navbar-search {
+                max-width: none;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .nav-links > a:not(.nav-icon) {
+                display: none;
+            }
+
+            .page-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+        }
+
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                height: auto;
+
+                padding: 12px 0;
+            }
+
+            .navbar-container {
+                flex-wrap: wrap;
+            }
+
+            .navbar-search {
+                order: 3;
+
+                flex-basis: 100%;
+            }
+
+            .page-header {
+                align-items: flex-start;
+
+                gap: 20px;
+            }
+
+            .page-title {
+                font-size: 25px;
+            }
+
+            .products-card {
+                overflow-x: auto;
+            }
+
+            .products-table {
+                min-width: 760px;
+            }
+
+        }
+
+
+        @media (max-width: 576px) {
+
+            .page-header {
+                flex-direction: column;
+            }
+
+            .add-product-btn {
+                width: 100%;
+
+                justify-content: center;
+            }
+
+            .product-search {
+                width: 100%;
+            }
+
+            .toolbar {
+                flex-direction: column;
+
+                gap: 12px;
+
+                align-items: stretch;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="navbar-container">
+
+
+        <!-- Logo -->
+
+        <a href="#" class="brand">
+
+            <div class="brand-icon">
+
+                <i class="fas fa-store"></i>
+
+            </div>
+
+            Zentra
+
+        </a>
+
+
+        <!-- Search -->
+
+        <div class="navbar-search">
+
+            <i class="fas fa-search"></i>
+
+            <input
+                type="text"
+                placeholder="Search products, brands, and categories"
+            >
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <div class="nav-links">
+
+            <a href="#">
+                Explore
+            </a>
+
+            <a href="#">
+                Sell
+            </a>
+
+
+            <!-- Messages -->
+
+            <a href="#" class="nav-icon">
+
+                <i class="far fa-comment-alt"></i>
+
+                <span class="notification-badge">
+                    3
+                </span>
+
+            </a>
+
+
+            <!-- Notifications -->
+
+            <a href="#" class="nav-icon">
+
+                <i class="far fa-bell"></i>
+
+                <span class="notification-badge">
+                    2
+                </span>
+
+            </a>
+
+
+            <!-- Cart -->
+
+            <a href="#" class="nav-icon">
+
+                <i class="fas fa-shopping-cart"></i>
+
+                <span class="notification-badge">
+                    1
+                </span>
+
+            </a>
+
+
+            <!-- Avatar -->
+
+            <a href="#">
+
+                <img
+                    src="https://i.pravatar.cc/100?img=12"
+                    class="avatar"
+                    alt="Profile"
+                >
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="page-container">
+
+
+    <!-- Breadcrumb -->
+
+    <nav aria-label="breadcrumb">
+
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a href="#">
+                    Home
+                </a>
+            </li>
+
+            <li class="breadcrumb-item">
+                <a href="#">
+                    Seller
+                </a>
+            </li>
+
+            <li class="breadcrumb-item active">
+                Products
+            </li>
+
+        </ol>
+
+    </nav>
+
+
+
+    <!-- =================================================
+         PAGE HEADER
+    ================================================== -->
+
+    <div class="page-header">
+
+
+        <div>
+
+            <h1 class="page-title">
+                Products
+            </h1>
+
+            <div class="listing-count">
+
+                <span id="productCount">
+                    8
+                </span>
+
+                listings
+
+            </div>
+
+        </div>
+
+
+        <!-- Add Product -->
+
+        <button
+            class="add-product-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#addProductModal"
+        >
+
+            <i class="fas fa-plus"></i>
+
+            Add product
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =================================================
+         TOOLBAR
+    ================================================== -->
+
+    <div class="toolbar">
+
+        <div class="product-search">
+
+            <i class="fas fa-search"></i>
+
+            <input
+                type="text"
+                id="productSearch"
+                placeholder="Search your products..."
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         PRODUCTS TABLE
+    ================================================== -->
+
+    <div class="products-card">
+
+        <table class="products-table">
+
+            <thead>
+
+                <tr>
+
+                    <th style="width: 48%;">
+                        Product
+                    </th>
+
+                    <th style="width: 12%;">
+                        Price
+                    </th>
+
+                    <th style="width: 14%;">
+                        Stock
+                    </th>
+
+                    <th style="width: 12%;">
+                        Rating
+                    </th>
+
+                    <th
+                        style="width: 14%; text-align:right;"
+                    >
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="productsTable">
+
+
+                <!-- =================================================
+                     PRODUCT 1
+                ================================================== -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="product-info">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=100&q=80"
+                                class="product-image"
+                                alt="Headphones"
+                            >
+
+                            <span class="product-name">
+                                Aurora ANC Over-Ear Headphones
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="product-price">
+                            $249
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="stock-badge stock-good">
+                            42 left
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="rating">
+                            4.8
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action-btn edit-btn"
+                                title="Edit"
+                                onclick="editProduct(this)"
+                            >
+
+                                <i class="far fa-pen-to-square"></i>
+
+                            </button>
+
+
+                            <button
+                                class="action-btn delete-btn"
+                                title="Delete"
+                                onclick="deleteProduct(this)"
+                            >
+
+                                <i class="far fa-trash-can"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- PRODUCT 2 -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="product-info">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=100&q=80"
+                                class="product-image"
+                                alt="Watch"
+                            >
+
+                            <span class="product-name">
+                                Meridian Field Watch 38mm
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        <span class="product-price">
+                            $189
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <span class="stock-badge stock-good">
+                            8 left
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        <span class="rating">
+                            4.6
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action-btn edit-btn"
+                                onclick="editProduct(this)"
+                            >
+                                <i class="far fa-pen-to-square"></i>
+                            </button>
+
+                            <button
+                                class="action-btn delete-btn"
+                                onclick="deleteProduct(this)"
+                            >
+                                <i class="far fa-trash-can"></i>
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- PRODUCT 3 -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="product-info">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=100&q=80"
+                                class="product-image"
+                                alt="Smartwatch"
+                            >
+
+                            <span class="product-name">
+                                Pulse Smartwatch S3
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        <span class="product-price">
+                            $219
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <span class="stock-badge stock-out">
+                            0 left
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        <span class="rating">
+                            4.4
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action-btn edit-btn"
+                                onclick="editProduct(this)"
+                            >
+                                <i class="far fa-pen-to-square"></i>
+                            </button>
+
+                            <button
+                                class="action-btn delete-btn"
+                                onclick="deleteProduct(this)"
+                            >
+                                <i class="far fa-trash-can"></i>
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- PRODUCT 4 -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="product-info">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=100&q=80"
+                                class="product-image"
+                                alt="Laptop"
+                            >
+
+                            <span class="product-name">
+                                Atlas 14 Ultrabook
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        <span class="product-price">
+                            $1,299
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <span class="stock-badge stock-good">
+                            15 left
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        <span class="rating">
+                            4.7
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action-btn edit-btn"
+                                onclick="editProduct(this)"
+                            >
+                                <i class="far fa-pen-to-square"></i>
+                            </button>
+
+                            <button
+                                class="action-btn delete-btn"
+                                onclick="deleteProduct(this)"
+                            >
+                                <i class="far fa-trash-can"></i>
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- PRODUCT 5 -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="product-info">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=100&q=80"
+                                class="product-image"
+                                alt="Camera"
+                            >
+
+                            <span class="product-name">
+                                Lumen M2 Mirrorless Camera
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        <span class="product-price">
+                            $899
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <span class="stock-badge stock-good">
+                            6 left
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        <span class="rating">
+                            4.9
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action-btn edit-btn"
+                                onclick="editProduct(this)"
+                            >
+                                <i class="far fa-pen-to-square"></i>
+                            </button>
+
+                            <button
+                                class="action-btn delete-btn"
+                                onclick="deleteProduct(this)"
+                            >
+                                <i class="far fa-trash-can"></i>
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- PRODUCT 6 -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="product-info">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=100&q=80"
+                                class="product-image"
+                                alt="Sneakers"
+                            >
+
+                            <span class="product-name">
+                                Trail Runner GT Sneakers
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        <span class="product-price">
+                            $139
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <span class="stock-badge stock-good">
+                            87 left
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        <span class="rating">
+                            4.5
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action-btn edit-btn"
+                                onclick="editProduct(this)"
+                            >
+                                <i class="far fa-pen-to-square"></i>
+                            </button>
+
+                            <button
+                                class="action-btn delete-btn"
+                                onclick="deleteProduct(this)"
+                            >
+                                <i class="far fa-trash-can"></i>
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- PRODUCT 7 -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="product-info">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=100&q=80"
+                                class="product-image"
+                                alt="Backpack"
+                            >
+
+                            <span class="product-name">
+                                Canvas Daypack 22L
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        <span class="product-price">
+                            $118
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <span class="stock-badge stock-good">
+                            31 left
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        <span class="rating">
+                            4.6
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action-btn edit-btn"
+                                onclick="editProduct(this)"
+                            >
+                                <i class="far fa-pen-to-square"></i>
+                            </button>
+
+                            <button
+                                class="action-btn delete-btn"
+                                onclick="deleteProduct(this)"
+                            >
+                                <i class="far fa-trash-can"></i>
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- PRODUCT 8 -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="product-info">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=100&q=80"
+                                class="product-image"
+                                alt="Sunglasses"
+                            >
+
+                            <span class="product-name">
+                                Haze Polarised Sunglasses
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        <span class="product-price">
+                            $96
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <span class="stock-badge stock-good">
+                            54 left
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        <span class="rating">
+                            4.3
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action-btn edit-btn"
+                                onclick="editProduct(this)"
+                            >
+                                <i class="far fa-pen-to-square"></i>
+                            </button>
+
+                            <button
+                                class="action-btn delete-btn"
+                                onclick="deleteProduct(this)"
+                            >
+                                <i class="far fa-trash-can"></i>
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     ADD PRODUCT MODAL
+===================================================== -->
+
+<div
+    class="modal fade"
+    id="addProductModal"
+    tabindex="-1"
+>
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    Add Product
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <form id="addProductForm">
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Product name
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="newProductName"
+                            placeholder="Enter product name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Price
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="newProductPrice"
+                                placeholder="249"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Stock
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="newProductStock"
+                                placeholder="20"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Image URL
+                        </label>
+
+                        <input
+                            type="url"
+                            class="form-control"
+                            id="newProductImage"
+                            placeholder="https://..."
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary w-100"
+                        style="background:#6366f1;border:none;"
+                    >
+
+                        Add Product
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     BOOTSTRAP JS
+===================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+
+<script>
+
+    /* =========================================
+       PRODUCT SEARCH
+    ========================================= */
+
+    const searchInput =
+        document.getElementById("productSearch");
+
+    const table =
+        document.getElementById("productsTable");
+
+    const countElement =
+        document.getElementById("productCount");
+
+
+    searchInput.addEventListener("input", function () {
+
+        const searchValue =
+            this.value.toLowerCase().trim();
+
+        const rows =
+            table.querySelectorAll("tr");
+
+        let visibleCount = 0;
+
+
+        rows.forEach(row => {
+
+            const productName =
+                row
+                    .querySelector(".product-name")
+                    .textContent
+                    .toLowerCase();
+
+
+            if (productName.includes(searchValue)) {
+
+                row.style.display = "";
+
+                visibleCount++;
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+
+        countElement.textContent =
+            visibleCount;
+
+    });
+
+
+
+    /* =========================================
+       DELETE PRODUCT
+    ========================================= */
+
+    function deleteProduct(button) {
+
+        const row =
+            button.closest("tr");
+
+
+        const productName =
+            row.querySelector(".product-name")
+                .textContent;
+
+
+        const confirmed =
+            confirm(
+                `Are you sure you want to delete "${productName}"?`
+            );
+
+
+        if (confirmed) {
+
+            row.remove();
+
+            updateProductCount();
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       UPDATE COUNT
+    ========================================= */
+
+    function updateProductCount() {
+
+        const rows =
+            table.querySelectorAll(
+                "tr:not([style*='display: none'])"
+            );
+
+        countElement.textContent =
+            rows.length;
+
+    }
+
+
+
+    /* =========================================
+       EDIT PRODUCT
+    ========================================= */
+
+    function editProduct(button) {
+
+        const row =
+            button.closest("tr");
+
+
+        const productName =
+            row.querySelector(".product-name")
+                .textContent;
+
+
+        alert(
+            `Edit product: ${productName}`
+        );
+
+    }
+
+
+
+    /* =========================================
+       ADD PRODUCT
+    ========================================= */
+
+    const addProductForm =
+        document.getElementById("addProductForm");
+
+
+    addProductForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById(
+                    "newProductName"
+                ).value;
+
+
+            const price =
+                document.getElementById(
+                    "newProductPrice"
+                ).value;
+
+
+            const stock =
+                document.getElementById(
+                    "newProductStock"
+                ).value;
+
+
+            const image =
+                document.getElementById(
+                    "newProductImage"
+                ).value ||
+                "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=100&q=80";
+
+
+            let stockClass =
+                "stock-good";
+
+
+            if (parseInt(stock) === 0) {
+
+                stockClass =
+                    "stock-out";
+
+            } else if (parseInt(stock) < 10) {
+
+                stockClass =
+                    "stock-low";
+
+            }
+
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <div class="product-info">
+
+                        <img
+                            src="${image}"
+                            class="product-image"
+                            alt="${name}"
+                        >
+
+                        <span class="product-name">
+                            ${name}
+                        </span>
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    <span class="product-price">
+                        $${price}
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="stock-badge ${stockClass}">
+                        ${stock} left
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="rating">
+                        New
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <div class="actions">
+
+                        <button
+                            class="action-btn edit-btn"
+                            onclick="editProduct(this)"
+                        >
+
+                            <i class="far fa-pen-to-square"></i>
+
+                        </button>
+
+
+                        <button
+                            class="action-btn delete-btn"
+                            onclick="deleteProduct(this)"
+                        >
+
+                            <i class="far fa-trash-can"></i>
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+
+            updateProductCount();
+
+
+            addProductForm.reset();
+
+
+            const modal =
+                bootstrap.Modal.getInstance(
+                    document.getElementById(
+                        "addProductModal"
+                    )
+                );
+
+
+            modal.hide();
+
+        }
+    );
+
+</script>
+
+
+</body>
+</html>

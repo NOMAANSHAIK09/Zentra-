@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | Zentra</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #f7f8fc;
+            color: #111827;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            height: 72px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .navbar-container {
+            max-width: 1180px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .brand {
+            text-decoration: none;
+            color: #111827;
+            font-size: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            background: #6366f1;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+        }
+
+        .nav-text {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .login-link {
+            text-decoration: none;
+            color: #4f46e5;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .login-link:hover {
+            color: #4338ca;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================== */
+
+        .signup-section {
+            min-height: calc(100vh - 72px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 55px 20px;
+        }
+
+        .signup-wrapper {
+            width: 100%;
+            max-width: 1050px;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06);
+        }
+
+
+        /* =========================
+           LEFT SIDE
+        ========================== */
+
+        .signup-info {
+            background: #6366f1;
+            color: white;
+            padding: 55px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            margin-bottom: 25px;
+        }
+
+        .signup-info h1 {
+            font-size: 31px;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 15px;
+        }
+
+        .signup-info > p {
+            color: rgba(255,255,255,0.82);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        .benefit {
+            display: flex;
+            gap: 13px;
+            margin-bottom: 22px;
+        }
+
+        .benefit-icon {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            border-radius: 9px;
+            background: rgba(255,255,255,0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        .benefit h6 {
+            margin: 0 0 3px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .benefit p {
+            margin: 0;
+            font-size: 12px;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           RIGHT SIDE
+        ========================== */
+
+        .signup-form-area {
+            padding: 45px 50px;
+        }
+
+        .form-heading {
+            margin-bottom: 28px;
+        }
+
+        .form-heading h2 {
+            font-size: 25px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .form-heading p {
+            margin: 0;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+
+        /* =========================
+           FORM
+        ========================== */
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 7px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .form-control {
+            height: 48px;
+            border: 1px solid #dbe1ea;
+            border-radius: 9px;
+            font-family: "Poppins", sans-serif;
+            font-size: 13px;
+            padding-left: 43px;
+            box-shadow: none;
+            transition: 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.10);
+        }
+
+        .password-input {
+            padding-right: 45px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .password-toggle:hover {
+            color: #6366f1;
+        }
+
+
+        /* =========================
+           TERMS
+        ========================== */
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .terms input {
+            margin-top: 4px;
+            accent-color: #6366f1;
+        }
+
+        .terms label {
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .terms a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================== */
+
+        .signup-btn {
+            width: 100%;
+            height: 48px;
+            border: none;
+            border-radius: 9px;
+            background: #6366f1;
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 22px;
+            transition: all 0.2s ease;
+        }
+
+        .signup-btn:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+            box-shadow: 0 7px 18px rgba(99,102,241,0.22);
+        }
+
+        .signup-btn:active {
+            transform: translateY(0);
+        }
+
+
+        /* =========================
+           DIVIDER
+        ========================== */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .divider-line {
+            height: 1px;
+            background: #e5e7eb;
+            flex: 1;
+        }
+
+        .divider span {
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           SOCIAL BUTTON
+        ========================== */
+
+        .google-btn {
+            width: 100%;
+            height: 46px;
+            border: 1px solid #dbe1ea;
+            border-radius: 9px;
+            background: white;
+            color: #334155;
+            font-family: "Poppins", sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .google-btn:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .google-btn i {
+            margin-right: 9px;
+        }
+
+
+        /* =========================
+           LOGIN
+        ========================== */
+
+        .login-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .login-text a {
+            color: #4f46e5;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 850px) {
+
+            .signup-wrapper {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .signup-info {
+                display: none;
+            }
+
+            .signup-form-area {
+                padding: 40px 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .navbar {
+                height: 65px;
+            }
+
+            .navbar-container {
+                padding: 0 15px;
+            }
+
+            .brand {
+                font-size: 19px;
+            }
+
+            .brand-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .nav-text {
+                display: none;
+            }
+
+            .signup-section {
+                padding: 25px 15px;
+                min-height: calc(100vh - 65px);
+            }
+
+            .signup-form-area {
+                padding: 30px 22px;
+            }
+
+            .form-heading h2 {
+                font-size: 22px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================== -->
+
+<nav class="navbar">
+    <div class="container-fluid navbar-container h-100">
+
+        <div class="d-flex align-items-center justify-content-between h-100">
+
+            <!-- Logo -->
+            <a href="#" class="brand">
+
+                <span class="brand-icon">
+                    <i class="fa-solid fa-store"></i>
+                </span>
+
+                Zentra
+
+            </a>
+
+
+            <!-- Right -->
+            <div class="d-flex align-items-center gap-3">
+
+                <span class="nav-text">
+                    Already have an account?
+                </span>
+
+                <a href="login.html" class="login-link">
+                    Log in
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+
+
+
+<!-- =========================
+     SIGNUP SECTION
+========================== -->
+
+<section class="signup-section">
+
+    <div class="signup-wrapper">
+
+
+        <!-- =====================
+             LEFT INFORMATION
+        ====================== -->
+
+        <div class="signup-info">
+
+            <div class="info-icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+
+            <h1>
+                Join Zentra.
+                Start buying or selling.
+            </h1>
+
+            <p>
+                Create your free account and get access to
+                thousands of products from independent sellers
+                and growing brands.
+            </p>
+
+
+            <!-- Benefit 1 -->
+
+            <div class="benefit">
+
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+
+                <div>
+
+                    <h6>
+                        Discover products
+                    </h6>
+
+                    <p>
+                        Find products from trusted sellers
+                        across different categories.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Benefit 2 -->
+
+            <div class="benefit">
+
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div>
+
+                    <h6>
+                        Shop with confidence
+                    </h6>
+
+                    <p>
+                        Secure checkout and transparent
+                        order tracking.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Benefit 3 -->
+
+            <div class="benefit">
+
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+
+                <div>
+
+                    <h6>
+                        Sell your products
+                    </h6>
+
+                    <p>
+                        Turn your products into a business
+                        with your own Zentra store.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================
+             SIGNUP FORM
+        ====================== -->
+
+        <div class="signup-form-area">
+
+            <div class="form-heading">
+
+                <h2>
+                    Create your account
+                </h2>
+
+                <p>
+                    It only takes a minute to get started.
+                </p>
+
+            </div>
+
+
+            <form id="signupForm">
+
+
+                <!-- Full Name -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Full name
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-user input-icon"></i>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Email -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Email address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-envelope input-icon"></i>
+
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Password -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock input-icon"></i>
+
+                        <input
+                            type="password"
+                            class="form-control password-input"
+                            id="password"
+                            placeholder="Create a password"
+                            required
+                            minlength="8"
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('password', 'passwordIcon')"
+                        >
+
+                            <i
+                                class="fa-regular fa-eye"
+                                id="passwordIcon"
+                            ></i>
+
+                        </button>
+
+                    </div>
+
+                    <small class="text-muted" style="font-size:10px;">
+                        Use at least 8 characters.
+                    </small>
+
+                </div>
+
+
+
+                <!-- Confirm Password -->
+
+                <div class="mb-2">
+
+                    <label class="form-label">
+                        Confirm password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock input-icon"></i>
+
+                        <input
+                            type="password"
+                            class="form-control password-input"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('confirmPassword', 'confirmPasswordIcon')"
+                        >
+
+                            <i
+                                class="fa-regular fa-eye"
+                                id="confirmPasswordIcon"
+                            ></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Terms -->
+
+                <div class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required
+                    >
+
+                    <label for="terms">
+
+                        I agree to Zentra's
+                        <a href="#">
+                            Terms of Service
+                        </a>
+                        and
+                        <a href="#">
+                            Privacy Policy
+                        </a>.
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- Signup Button -->
+
+                <button
+                    type="submit"
+                    class="signup-btn"
+                    id="signupButton"
+                >
+
+                    Create account
+
+                </button>
+
+
+
+                <!-- Divider -->
+
+                <div class="divider">
+
+                    <div class="divider-line"></div>
+
+                    <span>OR</span>
+
+                    <div class="divider-line"></div>
+
+                </div>
+
+
+
+                <!-- Google -->
+
+                <button
+                    type="button"
+                    class="google-btn"
+                    onclick="googleSignup()"
+                >
+
+                    <i class="fa-brands fa-google"></i>
+
+                    Continue with Google
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- Login -->
+
+            <div class="login-text">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Log in
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script>
+
+    /* =========================
+       PASSWORD VISIBILITY
+    ========================== */
+
+    function togglePassword(inputId, iconId) {
+
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+
+        if (input.type === "password") {
+
+            input.type = "text";
+
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+
+        } else {
+
+            input.type = "password";
+
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+
+        }
+
+    }
+
+
+
+    /* =========================
+       SIGNUP FORM
+    ========================== */
+
+    document
+        .getElementById("signupForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const name =
+                document.getElementById("name").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const confirmPassword =
+                document.getElementById("confirmPassword").value;
+
+            const terms =
+                document.getElementById("terms").checked;
+
+            const button =
+                document.getElementById("signupButton");
+
+
+            /* Check name */
+
+            if (name.length < 2) {
+
+                alert("Please enter your full name.");
+
+                return;
+            }
+
+
+            /* Check password */
+
+            if (password.length < 8) {
+
+                alert("Password must contain at least 8 characters.");
+
+                return;
+            }
+
+
+            /* Check matching passwords */
+
+            if (password !== confirmPassword) {
+
+                alert("Passwords do not match.");
+
+                return;
+            }
+
+
+            /* Check terms */
+
+            if (!terms) {
+
+                alert("Please agree to the Terms of Service.");
+
+                return;
+            }
+
+
+            /* Loading state */
+
+            button.disabled = true;
+
+            button.innerHTML = `
+                <span
+                    class="spinner-border spinner-border-sm me-2"
+                    role="status"
+                ></span>
+                Creating account...
+            `;
+
+
+            /*
+                FRONTEND DEMO
+
+                Later replace this section with
+                your Django signup API/form.
+            */
+
+            setTimeout(function() {
+
+                alert(
+                    "Account created successfully!"
+                );
+
+                button.disabled = false;
+
+                button.innerHTML =
+                    "Create account";
+
+                // Example:
+                // window.location.href = "home.html";
+
+            }, 1200);
+
+        });
+
+
+
+    /* =========================
+       GOOGLE SIGNUP
+    ========================== */
+
+    function googleSignup() {
+
+        alert(
+            "Google authentication will be connected here."
+        );
+
+        /*
+            Later:
+
+            window.location.href =
+                "/accounts/google/login/";
+        */
+
+    }
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zentra - Profile</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================
+           GLOBAL
+        ========================= */
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #eef0ff;
+            --text-dark: #111827;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --background: #f8fafc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text-dark);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            max-width: 1220px;
+            height: 100%;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+
+        /* Logo */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 22px;
+            font-weight: 700;
+            color: #111827;
+            min-width: 200px;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--primary);
+            color: white;
+
+            font-size: 17px;
+        }
+
+
+        /* Search */
+
+        .navbar-search {
+            flex: 1;
+            max-width: 610px;
+            position: relative;
+        }
+
+        .navbar-search i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            color: #64748b;
+        }
+
+        .navbar-search input {
+            width: 100%;
+            height: 44px;
+
+            border: 1px solid #dbe2ec;
+            border-radius: 10px;
+
+            padding: 0 20px 0 47px;
+
+            font-size: 15px;
+            outline: none;
+
+            background: white;
+        }
+
+        .navbar-search input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99,102,241,.08);
+        }
+
+
+        /* Navigation */
+
+        .nav-links {
+            margin-left: auto;
+
+            display: flex;
+            align-items: center;
+            gap: 27px;
+        }
+
+        .nav-links a {
+            color: #64748b;
+            font-size: 15px;
+            font-weight: 500;
+
+            transition: .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+
+        /* Icons */
+
+        .nav-icon {
+            width: 38px;
+            height: 38px;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #64748b;
+
+            border-radius: 10px;
+
+            transition: .2s;
+        }
+
+        .nav-icon:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .notification-badge {
+            position: absolute;
+
+            top: -3px;
+            right: -3px;
+
+            min-width: 18px;
+            height: 18px;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            border: 2px solid white;
+        }
+
+
+        /* Avatar */
+
+        .nav-avatar {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid #e5e7eb;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page-container {
+            max-width: 1220px;
+            margin: auto;
+            padding: 20px 0 80px;
+        }
+
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb-wrapper {
+            margin-bottom: 18px;
+        }
+
+        .breadcrumb-item {
+            font-size: 15px;
+        }
+
+        .breadcrumb-item a {
+            color: #64748b;
+        }
+
+        .breadcrumb-item.active {
+            color: #111827;
+        }
+
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: #cbd5e1;
+        }
+
+
+        /* =========================
+           PROFILE HEADER
+        ========================= */
+
+        .profile-card {
+            background: white;
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            padding: 28px 26px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-shadow: 0 1px 2px rgba(0,0,0,.02);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 1px solid #dbe2ec;
+        }
+
+        .profile-name {
+            font-size: 23px;
+            font-weight: 700;
+
+            margin-bottom: 6px;
+        }
+
+        .profile-detail {
+            color: #64748b;
+            font-size: 14px;
+
+            margin-bottom: 4px;
+        }
+
+        .profile-detail i {
+            width: 18px;
+            color: #64748b;
+        }
+
+
+        /* Buyer Seller Badge */
+
+        .role-badge {
+            background: var(--primary-light);
+            color: #4f46e5;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           STATISTICS
+        ========================= */
+
+        .stats-section {
+            margin-top: 18px;
+        }
+
+        .stat-card {
+            background: white;
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            min-height: 94px;
+
+            padding: 20px;
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            transition: .2s;
+        }
+
+        .stat-card:hover {
+            border-color: #c7d2fe;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 8px 25px rgba(15,23,42,.05);
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+
+            border-radius: 11px;
+
+            background: var(--primary-light);
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+        .stat-number {
+            font-size: 19px;
+            font-weight: 700;
+
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+
+        /* =========================
+           PROFILE TABS
+        ========================= */
+
+        .profile-tabs-wrapper {
+            margin-top: 36px;
+        }
+
+        .profile-tabs {
+            display: inline-flex;
+
+            background: #f1f5f9;
+
+            border-radius: 10px;
+
+            padding: 3px;
+        }
+
+        .profile-tab {
+            border: none;
+            background: transparent;
+
+            padding: 9px 17px;
+
+            border-radius: 8px;
+
+            color: #64748b;
+
+            font-size: 15px;
+
+            transition: .2s;
+        }
+
+        .profile-tab:hover {
+            color: var(--primary);
+        }
+
+        .profile-tab.active {
+            background: white;
+
+            color: #111827;
+
+            box-shadow: 0 1px 3px rgba(0,0,0,.08);
+        }
+
+
+        /* =========================
+           TAB CONTENT
+        ========================= */
+
+        .tab-content-box {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 0 12px 12px 12px;
+
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           ORDER ROW
+        ========================= */
+
+        .order-row {
+            min-height: 88px;
+
+            padding: 17px;
+
+            display: flex;
+            align-items: center;
+
+            border-bottom: 1px solid var(--border);
+
+            transition: .2s;
+        }
+
+        .order-row:last-child {
+            border-bottom: none;
+        }
+
+        .order-row:hover {
+            background: #fafbff;
+        }
+
+        .product-image {
+            width: 53px;
+            height: 53px;
+
+            border-radius: 11px;
+
+            object-fit: cover;
+
+            margin-right: 17px;
+        }
+
+        .product-name {
+            font-size: 15px;
+            font-weight: 600;
+
+            margin-bottom: 4px;
+        }
+
+        .order-meta {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .order-price {
+            margin-left: auto;
+
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           EMPTY / OTHER TABS
+        ========================= */
+
+        .empty-tab {
+            padding: 60px 20px;
+
+            text-align: center;
+
+            color: #64748b;
+        }
+
+        .empty-tab i {
+            font-size: 35px;
+            margin-bottom: 15px;
+
+            color: #c7d2fe;
+        }
+
+
+        /* =========================
+           DROPDOWN
+        ========================= */
+
+        .profile-dropdown {
+            position: absolute;
+
+            right: 0;
+            top: 50px;
+
+            width: 190px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            padding: 7px;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,.12);
+
+            display: none;
+
+            z-index: 2000;
+        }
+
+        .profile-dropdown.show {
+            display: block;
+        }
+
+        .profile-dropdown a {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            color: #334155;
+
+            font-size: 14px;
+        }
+
+        .profile-dropdown a:hover {
+            background: #f8fafc;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 992px) {
+
+            .navbar-container {
+                padding: 0 20px;
+                gap: 15px;
+            }
+
+            .brand {
+                min-width: auto;
+            }
+
+            .navbar-search {
+                max-width: none;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links > a {
+                display: none;
+            }
+
+            .page-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                height: auto;
+                padding: 12px 0;
+            }
+
+            .navbar-container {
+                flex-wrap: wrap;
+            }
+
+            .navbar-search {
+                order: 3;
+                flex-basis: 100%;
+            }
+
+            .nav-links {
+                margin-left: auto;
+            }
+
+            .profile-card {
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .role-badge {
+                white-space: nowrap;
+            }
+
+            .profile-name {
+                font-size: 20px;
+            }
+
+            .profile-avatar {
+                width: 60px;
+                height: 60px;
+            }
+
+            .order-price {
+                display: none;
+            }
+        }
+
+
+        @media (max-width: 576px) {
+
+            .profile-card {
+                flex-direction: column;
+            }
+
+            .profile-info {
+                align-items: flex-start;
+            }
+
+            .role-badge {
+                align-self: flex-start;
+            }
+
+            .profile-tabs {
+                width: 100%;
+
+                overflow-x: auto;
+            }
+
+            .profile-tab {
+                white-space: nowrap;
+            }
+
+            .order-row {
+                padding: 14px;
+            }
+
+            .product-image {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="navbar-container">
+
+        <!-- Logo -->
+
+        <a href="#" class="brand">
+
+            <div class="brand-icon">
+                <i class="fas fa-store"></i>
+            </div>
+
+            Zentra
+
+        </a>
+
+
+        <!-- Search -->
+
+        <div class="navbar-search">
+
+            <i class="fas fa-search"></i>
+
+            <input
+                type="text"
+                placeholder="Search products, brands, and categories"
+            >
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <div class="nav-links">
+
+            <a href="#">Explore</a>
+
+            <a href="#">Sell</a>
+
+
+            <!-- Messages -->
+
+            <a href="message.html" class="nav-icon">
+
+                <i class="far fa-comment-alt"></i>
+
+                <span class="notification-badge">
+                    3
+                </span>
+
+            </a>
+
+
+            <!-- Notifications -->
+
+            <a href="#" class="nav-icon">
+
+                <i class="far fa-bell"></i>
+
+                <span class="notification-badge">
+                    2
+                </span>
+
+            </a>
+
+
+            <!-- Cart -->
+
+            <a href="cart.html" class="nav-icon">
+
+                <i class="fas fa-shopping-cart"></i>
+
+                <span class="notification-badge">
+                    1
+                </span>
+
+            </a>
+
+
+            <!-- Profile -->
+
+            <div class="avatar-wrapper">
+
+                <img
+                    src="https://i.pravatar.cc/100?img=12"
+                    class="nav-avatar"
+                    id="navAvatar"
+                    alt="Profile"
+                >
+
+
+                <div
+                    class="profile-dropdown"
+                    id="profileDropdown"
+                >
+
+                    <a href="profile.html">
+                        <i class="far fa-user"></i>
+                        Profile
+                    </a>
+
+                    <a href="myorder.html">
+                        <i class="fas fa-box"></i>
+                        Orders
+                    </a>
+
+                    <a href="settings.html">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+
+                    <hr class="my-1">
+
+                    <a href="login.html" class="text-danger">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="page-container">
+
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb-wrapper">
+
+        <nav aria-label="breadcrumb">
+
+            <ol class="breadcrumb mb-0">
+
+                <li class="breadcrumb-item">
+                    <a href="#">Home</a>
+                </li>
+
+                <li class="breadcrumb-item active">
+                    Profile
+                </li>
+
+            </ol>
+
+        </nav>
+
+    </div>
+
+
+
+    <!-- =================================================
+         PROFILE HEADER
+    ================================================== -->
+
+    <section class="profile-card">
+
+        <div class="profile-info">
+
+            <img
+                src="https://i.pravatar.cc/150?img=12"
+                class="profile-avatar"
+                alt="Profile"
+            >
+
+
+            <div>
+
+                <h1 class="profile-name">
+                    Alex Mercer
+                </h1>
+
+
+                <div class="profile-detail">
+
+                    <i class="far fa-envelope"></i>
+
+                    alex.mercer@zentra.app
+
+                </div>
+
+
+                <div class="profile-detail">
+
+                    <i class="fas fa-map-marker-alt"></i>
+
+                    San Francisco, CA · Member since March 2024
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="role-badge">
+
+            Buyer & Seller
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
+
+    <section class="stats-section">
+
+        <div class="row g-3">
+
+
+            <!-- Orders -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fas fa-cube"></i>
+
+                    </div>
+
+                    <div>
+
+                        <div class="stat-number">
+                            5
+                        </div>
+
+                        <div class="stat-label">
+                            Orders
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Products -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fas fa-store"></i>
+
+                    </div>
+
+                    <div>
+
+                        <div class="stat-number">
+                            3
+                        </div>
+
+                        <div class="stat-label">
+                            Products listed
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Reviews -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="far fa-star"></i>
+
+                    </div>
+
+                    <div>
+
+                        <div class="stat-number">
+                            24
+                        </div>
+
+                        <div class="stat-label">
+                            Reviews written
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PROFILE TABS
+    ================================================== -->
+
+    <section class="profile-tabs-wrapper">
+
+        <div class="profile-tabs">
+
+            <button
+                class="profile-tab active"
+                data-tab="orders"
+            >
+                Orders
+            </button>
+
+            <button
+                class="profile-tab"
+                data-tab="products"
+            >
+                Products
+            </button>
+
+            <button
+                class="profile-tab"
+                data-tab="reviews"
+            >
+                Reviews
+            </button>
+
+            <button
+                class="profile-tab"
+                data-tab="settings"
+            >
+                Settings
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TAB CONTENT
+        ================================================== -->
+
+        <div class="tab-content-box">
+
+
+            <!-- ORDERS -->
+
+            <div
+                class="tab-panel"
+                id="orders"
+            >
+
+
+                <!-- Order 1 -->
+
+                <div class="order-row">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=200&q=80"
+                        class="product-image"
+                        alt="Headphones"
+                    >
+
+                    <div>
+
+                        <div class="product-name">
+                            Aurora ANC Over-Ear Headphones
+                        </div>
+
+                        <div class="order-meta">
+                            ZN-48211 · 12 Jul 2026
+                        </div>
+
+                    </div>
+
+                    <div class="order-price">
+                        $249
+                    </div>
+
+                </div>
+
+
+                <!-- Order 2 -->
+
+                <div class="order-row">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=200&q=80"
+                        class="product-image"
+                        alt="Sneakers"
+                    >
+
+                    <div>
+
+                        <div class="product-name">
+                            Trail Runner GT Sneakers
+                        </div>
+
+                        <div class="order-meta">
+                            ZN-48190 · 10 Jul 2026
+                        </div>
+
+                    </div>
+
+                    <div class="order-price">
+                        $278
+                    </div>
+
+                </div>
+
+
+                <!-- Order 3 -->
+
+                <div class="order-row">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=200&q=80"
+                        class="product-image"
+                        alt="Backpack"
+                    >
+
+                    <div>
+
+                        <div class="product-name">
+                            Canvas Daypack 22L
+                        </div>
+
+                        <div class="order-meta">
+                            ZN-47822 · 28 Jun 2026
+                        </div>
+
+                    </div>
+
+                    <div class="order-price">
+                        $89
+                    </div>
+
+                </div>
+
+
+                <!-- Order 4 -->
+
+                <div class="order-row">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=200&q=80"
+                        class="product-image"
+                        alt="Watch"
+                    >
+
+                    <div>
+
+                        <div class="product-name">
+                            Classic Steel Watch
+                        </div>
+
+                        <div class="order-meta">
+                            ZN-47601 · 18 Jun 2026
+                        </div>
+
+                    </div>
+
+                    <div class="order-price">
+                        $179
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PRODUCTS -->
+
+            <div
+                class="tab-panel d-none"
+                id="products"
+            >
+
+                <div class="empty-tab">
+
+                    <i class="fas fa-store d-block"></i>
+
+                    <h5>
+                        Your listed products
+                    </h5>
+
+                    <p>
+                        Products you sell on Zentra will appear here.
+                    </p>
+
+                    <button class="btn btn-primary rounded-pill px-4">
+                        Add Product
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- REVIEWS -->
+
+            <div
+                class="tab-panel d-none"
+                id="reviews"
+            >
+
+                <div class="empty-tab">
+
+                    <i class="far fa-star d-block"></i>
+
+                    <h5>
+                        Your reviews
+                    </h5>
+
+                    <p>
+                        Reviews you've written for sellers and products
+                        will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SETTINGS -->
+
+            <div
+                class="tab-panel d-none"
+                id="settings"
+            >
+
+                <div class="p-4">
+
+                    <h5 class="mb-4">
+                        Account Settings
+                    </h5>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Full name
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="Alex Mercer"
+                        >
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            class="form-control"
+                            value="alex.mercer@zentra.app"
+                        >
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="San Francisco, CA"
+                        >
+
+                    </div>
+
+
+                    <button class="btn btn-primary">
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+
+    /* ==========================================
+       PROFILE DROPDOWN
+    ========================================== */
+
+    const navAvatar = document.getElementById("navAvatar");
+
+    const profileDropdown =
+        document.getElementById("profileDropdown");
+
+
+    navAvatar.addEventListener("click", function (event) {
+
+        event.stopPropagation();
+
+        profileDropdown.classList.toggle("show");
+
+    });
+
+
+    document.addEventListener("click", function () {
+
+        profileDropdown.classList.remove("show");
+
+    });
+
+
+
+    /* ==========================================
+       PROFILE TABS
+    ========================================== */
+
+    const tabs =
+        document.querySelectorAll(".profile-tab");
+
+    const panels =
+        document.querySelectorAll(".tab-panel");
+
+
+    tabs.forEach(tab => {
+
+        tab.addEventListener("click", function () {
+
+            const target =
+                this.getAttribute("data-tab");
+
+
+            /* Remove active */
+
+            tabs.forEach(t => {
+
+                t.classList.remove("active");
+
+            });
+
+
+            /* Add active */
+
+            this.classList.add("active");
+
+
+            /* Hide panels */
+
+            panels.forEach(panel => {
+
+                panel.classList.add("d-none");
+
+            });
+
+
+            /* Show selected panel */
+
+            document
+                .getElementById(target)
+                .classList.remove("d-none");
+
+        });
+
+    });
+
+
+
+    /* ==========================================
+       SEARCH
+    ========================================== */
+
+    const searchInput =
+        document.querySelector(".navbar-search input");
+
+
+    searchInput.addEventListener("keypress", function(event) {
+
+        if (event.key === "Enter") {
+
+            const query =
+                this.value.trim();
+
+            if (query !== "") {
+
+                alert(
+                    "Searching for: " + query
+                );
+
+            }
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

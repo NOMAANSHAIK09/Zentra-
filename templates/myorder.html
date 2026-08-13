@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zentra - My Orders</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #f8fafc;
+            color: #172033;
+            font-family: "Inter", sans-serif;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .zentra-navbar {
+            height: 72px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-inner {
+            max-width: 1350px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 25px;
+
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+
+        /* Logo */
+
+        .zentra-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #172033;
+            font-size: 21px;
+            font-weight: 700;
+
+            min-width: 200px;
+        }
+
+        .zentra-logo:hover {
+            color: #172033;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #6366f1;
+            color: white;
+
+            border-radius: 11px;
+
+            font-size: 17px;
+        }
+
+
+        /* Search */
+
+        .navbar-search {
+            flex: 1;
+            max-width: 640px;
+            position: relative;
+        }
+
+        .navbar-search i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #64748b;
+        }
+
+        .navbar-search input {
+            width: 100%;
+            height: 46px;
+
+            border: 1px solid #dbe2ea;
+            border-radius: 10px;
+
+            padding: 0 18px 0 48px;
+
+            font-size: 15px;
+            color: #334155;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        .navbar-search input:focus {
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 3px rgba(99, 102, 241, 0.08);
+        }
+
+        .navbar-search input::placeholder {
+            color: #71809a;
+        }
+
+
+        /* Navigation */
+
+        .navbar-actions {
+            margin-left: auto;
+
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+        }
+
+        .nav-text {
+            color: #64748b;
+
+            font-size: 15px;
+            font-weight: 500;
+
+            margin-right: 10px;
+        }
+
+        .nav-text:hover {
+            color: #6366f1;
+        }
+
+
+        /* Nav Icons */
+
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #64748b;
+
+            position: relative;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .nav-icon:hover {
+            background: #f1f3ff;
+            color: #6366f1;
+        }
+
+        .notification-badge {
+            position: absolute;
+
+            top: -2px;
+            right: -2px;
+
+            min-width: 18px;
+            height: 18px;
+
+            padding: 0 5px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #6366f1;
+            color: white;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+
+        /* Profile */
+
+        .profile-image {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid white;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           PAGE CONTAINER
+        ===================================================== */
+
+        .page-container {
+            max-width: 1350px;
+
+            margin: 0 auto;
+
+            padding:
+                0 25px 80px;
+        }
+
+
+        /* =====================================================
+           BREADCRUMB
+        ===================================================== */
+
+        .breadcrumb-wrapper {
+            padding-top: 8px;
+
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb-custom {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 14px;
+        }
+
+        .breadcrumb-home {
+            color: #64748b;
+        }
+
+        .breadcrumb-home:hover {
+            color: #6366f1;
+        }
+
+        .breadcrumb-current {
+            color: #172033;
+            font-weight: 500;
+        }
+
+        .breadcrumb-arrow {
+            color: #cbd5e1;
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .page-title {
+            font-size: 29px;
+
+            font-weight: 700;
+
+            margin-bottom: 4px;
+
+            letter-spacing: -0.5px;
+        }
+
+        .page-subtitle {
+            color: #64748b;
+
+            font-size: 15px;
+
+            margin-bottom: 34px;
+        }
+
+
+        /* =====================================================
+           ORDER TABS
+        ===================================================== */
+
+        .orders-tabs {
+            display: inline-flex;
+
+            align-items: center;
+
+            background: #f1f5f9;
+
+            border-radius: 10px;
+
+            padding: 4px;
+
+            margin-bottom: 12px;
+        }
+
+        .order-tab {
+            border: none;
+
+            background: transparent;
+
+            color: #60728e;
+
+            padding: 8px 15px;
+
+            border-radius: 8px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+        }
+
+        .order-tab:hover {
+            color: #6366f1;
+        }
+
+        .order-tab.active {
+            background: white;
+
+            color: #172033;
+
+            box-shadow:
+                0 1px 3px rgba(15, 23, 42, 0.12);
+        }
+
+
+        /* =====================================================
+           ORDER CARD
+        ===================================================== */
+
+        .order-card {
+            background: white;
+
+            border: 1px solid #e0e7ef;
+
+            border-radius: 15px;
+
+            padding: 16px 17px;
+
+            margin-bottom: 16px;
+
+            transition: all 0.2s ease;
+        }
+
+        .order-card:hover {
+            border-color: #d7ddff;
+
+            box-shadow:
+                0 5px 20px rgba(15, 23, 42, 0.04);
+        }
+
+
+        /* Order Top */
+
+        .order-top {
+            display: flex;
+
+            align-items: center;
+
+            min-height: 25px;
+
+            gap: 25px;
+        }
+
+        .order-meta {
+            display: flex;
+
+            align-items: center;
+
+            gap: 23px;
+
+            font-size: 13px;
+        }
+
+        .order-label {
+            color: #71809a;
+        }
+
+        .order-id {
+            color: #172033;
+
+            font-weight: 600;
+        }
+
+        .order-date {
+            color: #71809a;
+        }
+
+        .order-price {
+            color: #172033;
+
+            font-weight: 700;
+        }
+
+
+        /* Status */
+
+        .order-status {
+            margin-left: auto;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            background: #eef0ff;
+
+            color: #4f46b8;
+
+            font-size: 13px;
+
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #6366f1;
+        }
+
+        .status-delivered {
+            background: #e9f9f0;
+            color: #15803d;
+        }
+
+        .status-delivered .status-dot {
+            background: #22c55e;
+        }
+
+        .status-cancelled {
+            background: #fff1f2;
+            color: #dc2626;
+        }
+
+        .status-cancelled .status-dot {
+            background: #ef4444;
+        }
+
+
+        /* Divider */
+
+        .order-divider {
+            border: 0;
+
+            border-top: 1px solid #e5eaf0;
+
+            margin:
+                11px 0 17px;
+        }
+
+
+        /* =====================================================
+           PRODUCT AREA
+        ===================================================== */
+
+        .order-product {
+            display: flex;
+
+            align-items: center;
+
+            gap: 17px;
+
+            min-height: 72px;
+        }
+
+
+        /* Product Image */
+
+        .product-image {
+            width: 70px;
+            height: 70px;
+
+            border-radius: 12px;
+
+            object-fit: cover;
+
+            flex-shrink: 0;
+        }
+
+
+        /* Product Info */
+
+        .product-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+        .product-name {
+            color: #172033;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            margin-bottom: 3px;
+        }
+
+        .product-details {
+            color: #71809a;
+
+            font-size: 13px;
+        }
+
+
+        /* Track Button */
+
+        .track-button {
+            border: none;
+
+            background: #6366f1;
+
+            color: white;
+
+            border-radius: 9px;
+
+            padding: 9px 15px;
+
+            font-size: 14px;
+
+            font-weight: 500;
+
+            min-width: 100px;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+        }
+
+        .track-button:hover {
+            background: #4f46e5;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 5px 15px rgba(99,102,241,0.25);
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+            display: none;
+
+            background: white;
+
+            border: 1px solid #e0e7ef;
+
+            border-radius: 15px;
+
+            padding: 70px 30px;
+
+            text-align: center;
+
+            color: #64748b;
+        }
+
+        .empty-state i {
+            font-size: 38px;
+
+            color: #a5b4fc;
+
+            margin-bottom: 15px;
+        }
+
+        .empty-state h4 {
+            color: #172033;
+
+            font-size: 18px;
+
+            margin-bottom: 7px;
+        }
+
+
+        /* =====================================================
+           TRACKING MODAL
+        ===================================================== */
+
+        .tracking-modal .modal-content {
+            border: none;
+
+            border-radius: 16px;
+        }
+
+        .tracking-header {
+            border-bottom: 1px solid #e5e7eb;
+
+            padding: 20px 22px;
+        }
+
+        .tracking-title {
+            font-size: 19px;
+
+            font-weight: 700;
+
+            margin: 0;
+        }
+
+        .tracking-order-id {
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-top: 4px;
+        }
+
+
+        /* Tracking Timeline */
+
+        .tracking-body {
+            padding: 25px;
+        }
+
+        .timeline {
+            position: relative;
+
+            padding-left: 35px;
+        }
+
+        .timeline::before {
+            content: "";
+
+            position: absolute;
+
+            left: 9px;
+            top: 8px;
+            bottom: 8px;
+
+            width: 2px;
+
+            background: #e2e8f0;
+        }
+
+        .timeline-item {
+            position: relative;
+
+            margin-bottom: 25px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+
+            left: -32px;
+            top: 2px;
+
+            width: 20px;
+            height: 20px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            border: 3px solid #cbd5e1;
+
+            z-index: 2;
+        }
+
+        .timeline-item.completed .timeline-dot {
+            border-color: #6366f1;
+
+            background: #6366f1;
+        }
+
+        .timeline-item.current .timeline-dot {
+            border-color: #6366f1;
+
+            background: white;
+        }
+
+        .timeline-title {
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #172033;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+
+            color: #64748b;
+
+            margin-top: 3px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .navbar-inner {
+                gap: 15px;
+            }
+
+            .zentra-logo {
+                min-width: auto;
+            }
+
+            .nav-text {
+                display: none;
+            }
+
+        }
+
+
+        @media (max-width: 768px) {
+
+            .zentra-navbar {
+                height: auto;
+
+                padding: 12px 0;
+            }
+
+            .navbar-inner {
+                flex-wrap: wrap;
+
+                padding: 0 15px;
+            }
+
+            .navbar-search {
+                order: 3;
+
+                flex-basis: 100%;
+
+                max-width: none;
+            }
+
+            .navbar-actions {
+                gap: 5px;
+            }
+
+            .page-container {
+                padding:
+                    0 15px 60px;
+            }
+
+            .order-meta {
+                gap: 12px;
+
+                flex-wrap: wrap;
+            }
+
+            .order-top {
+                align-items: flex-start;
+            }
+
+            .order-status {
+                font-size: 12px;
+            }
+
+        }
+
+
+        @media (max-width: 576px) {
+
+            .page-title {
+                font-size: 25px;
+            }
+
+            .page-subtitle {
+                margin-bottom: 25px;
+            }
+
+            .orders-tabs {
+                width: 100%;
+            }
+
+            .order-tab {
+                flex: 1;
+
+                padding:
+                    8px 5px;
+
+                font-size: 13px;
+            }
+
+            .order-card {
+                padding: 14px;
+            }
+
+            .order-top {
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+            .order-status {
+                margin-left: 0;
+            }
+
+            .order-meta {
+                gap: 10px;
+
+                font-size: 12px;
+            }
+
+            .order-product {
+                align-items: flex-start;
+            }
+
+            .product-image {
+                width: 60px;
+                height: 60px;
+            }
+
+            .product-name {
+                font-size: 14px;
+            }
+
+            .track-button {
+                min-width: auto;
+
+                padding:
+                    8px 11px;
+
+                font-size: 12px;
+            }
+
+            .product-details {
+                font-size: 12px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="zentra-navbar">
+
+    <div class="navbar-inner">
+
+
+        <!-- Logo -->
+
+        <a href="#" class="zentra-logo">
+
+            <span class="logo-icon">
+                <i class="fas fa-store"></i>
+            </span>
+
+            Zentra
+
+        </a>
+
+
+        <!-- Search -->
+
+        <div class="navbar-search">
+
+            <i class="fas fa-search"></i>
+
+            <input
+                type="text"
+                placeholder="Search products, brands, and categories"
+                id="mainSearch"
+            >
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <div class="navbar-actions">
+
+            <a href="#" class="nav-text">
+                Explore
+            </a>
+
+            <a href="#" class="nav-text">
+                Sell
+            </a>
+
+
+            <!-- Messages -->
+
+            <div
+                class="nav-icon"
+                title="Messages"
+                onclick="openMessages()"
+            >
+
+                <a href="message.html"><i class="far fa-comment-dots"></i></a>
+
+                <span class="notification-badge">
+                    3
+                </span>
+
+            </div>
+
+
+            <!-- Notifications -->
+
+            <div
+                class="nav-icon"
+                title="Notifications"
+            >
+
+                <a href="#"><i class="far fa-bell"></i></a>
+
+                <span class="notification-badge">
+                    2
+                </span>
+
+            </div>
+
+
+            <!-- Cart -->
+
+            <div
+                class="nav-icon"
+                title="Shopping Cart"
+                onclick="openCart()"
+            >
+
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+
+                <span class="notification-badge">
+                    1
+                </span>
+
+            </div>
+
+
+            <!-- Profile -->
+
+            <a href="profile.html">
+                <img
+                    src="https://i.pravatar.cc/100?img=12"
+                    alt="Profile"
+                    class="profile-image"
+                    onclick="openProfile()"
+                >
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main class="page-container">
+
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb-wrapper">
+
+        <div class="breadcrumb-custom">
+
+            <a
+                href="#"
+                class="breadcrumb-home"
+                onclick="goHome(event)"
+            >
+                Home
+            </a>
+
+            <span class="breadcrumb-arrow">
+                <i class="fas fa-chevron-right fa-xs"></i>
+            </span>
+
+            <span class="breadcrumb-current">
+                Orders
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Page Heading -->
+
+    <h1 class="page-title">
+        My orders
+    </h1>
+
+    <p class="page-subtitle">
+        Follow deliveries and revisit anything you've bought.
+    </p>
+
+
+
+    <!-- =====================================================
+         TABS
+    ===================================================== -->
+
+    <div class="orders-tabs">
+
+        <button
+            class="order-tab active"
+            data-tab="active"
+            onclick="switchTab('active', this)"
+        >
+            Active
+            <span id="activeCount">
+                (2)
+            </span>
+        </button>
+
+
+        <button
+            class="order-tab"
+            data-tab="completed"
+            onclick="switchTab('completed', this)"
+        >
+            Completed
+        </button>
+
+
+        <button
+            class="order-tab"
+            data-tab="cancelled"
+            onclick="switchTab('cancelled', this)"
+        >
+            Cancelled
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ACTIVE ORDERS
+    ===================================================== -->
+
+    <div id="activeOrders">
+
+
+        <!-- ORDER 1 -->
+
+        <div
+            class="order-card"
+            data-status="active"
+        >
+
+            <!-- Top -->
+
+            <div class="order-top">
+
+                <div class="order-meta">
+
+                    <span>
+                        <span class="order-label">
+                            Order
+                        </span>
+
+                        <span class="order-id">
+                            ZN-48211
+                        </span>
+                    </span>
+
+                    <span class="order-date">
+                        Placed 12 Jul 2026
+                    </span>
+
+                    <span class="order-price">
+                        $249
+                    </span>
+
+                </div>
+
+
+                <span class="order-status">
+
+                    <span class="status-dot"></span>
+
+                    Shipped
+
+                </span>
+
+            </div>
+
+
+            <hr class="order-divider">
+
+
+            <!-- Product -->
+
+            <div class="order-product">
+
+                <img
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80"
+                    alt="Aurora ANC Over-Ear Headphones"
+                    class="product-image"
+                >
+
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        Aurora ANC Over-Ear Headphones
+                    </div>
+
+                    <div class="product-details">
+                        Qty 1 · Arrives Wed, 15 Jul
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="track-button"
+                    onclick="trackOrder('ZN-48211', 'Aurora ANC Over-Ear Headphones')"
+                >
+                    Track Order
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ORDER 2 -->
+
+        <div
+            class="order-card"
+            data-status="active"
+        >
+
+            <div class="order-top">
+
+                <div class="order-meta">
+
+                    <span>
+
+                        <span class="order-label">
+                            Order
+                        </span>
+
+                        <span class="order-id">
+                            ZN-48190
+                        </span>
+
+                    </span>
+
+                    <span class="order-date">
+                        Placed 10 Jul 2026
+                    </span>
+
+                    <span class="order-price">
+                        $278
+                    </span>
+
+                </div>
+
+
+                <span class="order-status">
+
+                    <span class="status-dot"></span>
+
+                    Shipped
+
+                </span>
+
+            </div>
+
+
+            <hr class="order-divider">
+
+
+            <div class="order-product">
+
+                <img
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80"
+                    alt="Trail Runner GT Sneakers"
+                    class="product-image"
+                >
+
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        Trail Runner GT Sneakers
+                    </div>
+
+                    <div class="product-details">
+                        Qty 2 · Arrives today by 8 PM
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="track-button"
+                    onclick="trackOrder('ZN-48190', 'Trail Runner GT Sneakers')"
+                >
+                    Track Order
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         COMPLETED ORDERS
+    ===================================================== -->
+
+    <div
+        id="completedOrders"
+        style="display:none;"
+    >
+
+
+        <!-- Completed Order -->
+
+        <div
+            class="order-card"
+            data-status="completed"
+        >
+
+            <div class="order-top">
+
+                <div class="order-meta">
+
+                    <span>
+
+                        <span class="order-label">
+                            Order
+                        </span>
+
+                        <span class="order-id">
+                            ZN-47932
+                        </span>
+
+                    </span>
+
+                    <span class="order-date">
+                        Placed 02 Jul 2026
+                    </span>
+
+                    <span class="order-price">
+                        $129
+                    </span>
+
+                </div>
+
+
+                <span class="order-status status-delivered">
+
+                    <span class="status-dot"></span>
+
+                    Delivered
+
+                </span>
+
+            </div>
+
+
+            <hr class="order-divider">
+
+
+            <div class="order-product">
+
+                <img
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80"
+                    alt="Classic Watch"
+                    class="product-image"
+                >
+
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        Classic Steel Watch
+                    </div>
+
+                    <div class="product-details">
+                        Qty 1 · Delivered 05 Jul 2026
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="track-button"
+                    onclick="viewOrder('ZN-47932')"
+                >
+                    View Order
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Completed Order 2 -->
+
+        <div
+            class="order-card"
+            data-status="completed"
+        >
+
+            <div class="order-top">
+
+                <div class="order-meta">
+
+                    <span>
+
+                        <span class="order-label">
+                            Order
+                        </span>
+
+                        <span class="order-id">
+                            ZN-47781
+                        </span>
+
+                    </span>
+
+                    <span class="order-date">
+                        Placed 25 Jun 2026
+                    </span>
+
+                    <span class="order-price">
+                        $89
+                    </span>
+
+                </div>
+
+
+                <span class="order-status status-delivered">
+
+                    <span class="status-dot"></span>
+
+                    Delivered
+
+                </span>
+
+            </div>
+
+
+            <hr class="order-divider">
+
+
+            <div class="order-product">
+
+                <img
+                    src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=300&q=80"
+                    alt="Casual Jacket"
+                    class="product-image"
+                >
+
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        Everyday Casual Jacket
+                    </div>
+
+                    <div class="product-details">
+                        Qty 1 · Delivered 29 Jun 2026
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="track-button"
+                    onclick="viewOrder('ZN-47781')"
+                >
+                    View Order
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CANCELLED ORDERS
+    ===================================================== -->
+
+    <div
+        id="cancelledOrders"
+        style="display:none;"
+    >
+
+        <div
+            class="order-card"
+            data-status="cancelled"
+        >
+
+            <div class="order-top">
+
+                <div class="order-meta">
+
+                    <span>
+
+                        <span class="order-label">
+                            Order
+                        </span>
+
+                        <span class="order-id">
+                            ZN-47421
+                        </span>
+
+                    </span>
+
+                    <span class="order-date">
+                        Placed 18 Jun 2026
+                    </span>
+
+                    <span class="order-price">
+                        $199
+                    </span>
+
+                </div>
+
+
+                <span class="order-status status-cancelled">
+
+                    <span class="status-dot"></span>
+
+                    Cancelled
+
+                </span>
+
+            </div>
+
+
+            <hr class="order-divider">
+
+
+            <div class="order-product">
+
+                <img
+                    src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=300&q=80"
+                    alt="Wireless Headphones"
+                    class="product-image"
+                >
+
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        Wireless Studio Headphones
+                    </div>
+
+                    <div class="product-details">
+                        Qty 1 · Cancelled 19 Jun 2026
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="track-button"
+                    onclick="viewOrder('ZN-47421')"
+                >
+                    View Order
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Empty State -->
+
+    <div
+        id="emptyState"
+        class="empty-state"
+    >
+
+        <i class="fas fa-box-open"></i>
+
+        <h4>
+            No orders found
+        </h4>
+
+        <p class="mb-0">
+            You don't have any orders in this category yet.
+        </p>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================================
+     TRACKING MODAL
+========================================================= -->
+
+<div
+    class="modal fade tracking-modal"
+    id="trackingModal"
+    tabindex="-1"
+>
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+
+            <div class="tracking-header">
+
+                <h5
+                    class="tracking-title"
+                    id="trackingProduct"
+                >
+                    Track Order
+                </h5>
+
+                <div
+                    class="tracking-order-id"
+                    id="trackingOrderId"
+                >
+                    Order ZN-48211
+                </div>
+
+            </div>
+
+
+            <div class="tracking-body">
+
+                <div class="timeline">
+
+
+                    <div class="timeline-item completed">
+
+                        <span class="timeline-dot"></span>
+
+                        <div class="timeline-title">
+                            Order placed
+                        </div>
+
+                        <div class="timeline-date">
+                            12 Jul 2026 · 10:32 AM
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item completed">
+
+                        <span class="timeline-dot"></span>
+
+                        <div class="timeline-title">
+                            Order confirmed
+                        </div>
+
+                        <div class="timeline-date">
+                            12 Jul 2026 · 11:04 AM
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item completed">
+
+                        <span class="timeline-dot"></span>
+
+                        <div class="timeline-title">
+                            Shipped
+                        </div>
+
+                        <div class="timeline-date">
+                            13 Jul 2026 · 04:15 PM
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item current">
+
+                        <span class="timeline-dot"></span>
+
+                        <div class="timeline-title">
+                            Out for delivery
+                        </div>
+
+                        <div class="timeline-date">
+                            Expected today
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <span class="timeline-dot"></span>
+
+                        <div class="timeline-title">
+                            Delivered
+                        </div>
+
+                        <div class="timeline-date">
+                            Pending
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer border-0 pt-0">
+
+                <button
+                    type="button"
+                    class="btn btn-light"
+                    data-bs-dismiss="modal"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     BOOTSTRAP JS
+========================================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+
+<script>
+
+    /* =====================================================
+       TAB SWITCHING
+    ===================================================== */
+
+    function switchTab(tab, button) {
+
+        // Remove active state from all tabs
+        document
+            .querySelectorAll(".order-tab")
+            .forEach(btn => {
+
+                btn.classList.remove("active");
+
+            });
+
+
+        // Activate selected tab
+        button.classList.add("active");
+
+
+        // Hide all sections
+        document.getElementById("activeOrders").style.display = "none";
+
+        document.getElementById("completedOrders").style.display = "none";
+
+        document.getElementById("cancelledOrders").style.display = "none";
+
+
+        // Hide empty state
+        document.getElementById("emptyState").style.display = "none";
+
+
+        // Show selected section
+        if (tab === "active") {
+
+            document.getElementById("activeOrders").style.display = "block";
+
+        }
+
+        else if (tab === "completed") {
+
+            document.getElementById("completedOrders").style.display = "block";
+
+        }
+
+        else if (tab === "cancelled") {
+
+            document.getElementById("cancelledOrders").style.display = "block";
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       TRACK ORDER
+    ===================================================== */
+
+    function trackOrder(orderId, productName) {
+
+        document.getElementById(
+            "trackingProduct"
+        ).textContent = productName;
+
+
+        document.getElementById(
+            "trackingOrderId"
+        ).textContent = "Order " + orderId;
+
+
+        const modalElement =
+            document.getElementById("trackingModal");
+
+
+        const modal =
+            new bootstrap.Modal(modalElement);
+
+
+        modal.show();
+
+    }
+
+
+
+    /* =====================================================
+       VIEW COMPLETED / CANCELLED ORDER
+    ===================================================== */
+
+    function viewOrder(orderId) {
+
+        alert(
+            "Opening order " +
+            orderId +
+            "..."
+        );
+
+    }
+
+
+
+    /* =====================================================
+       NAVIGATION PLACEHOLDERS
+    ===================================================== */
+
+    function openMessages() {
+
+        alert("Messages page");
+
+    }
+
+
+    function openCart() {
+
+        alert("Shopping cart");
+
+    }
+
+
+    function openProfile() {
+
+        alert("Profile");
+
+    }
+
+
+    function goHome(event) {
+
+        event.preventDefault();
+
+        alert("Home page");
+
+    }
+
+
+
+    /* =====================================================
+       MAIN SEARCH
+    ===================================================== */
+
+    document
+        .getElementById("mainSearch")
+        .addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+
+                const query =
+                    this.value.trim();
+
+                if (query) {
+
+                    alert(
+                        "Searching for: " +
+                        query
+                    );
+
+                }
+
+            }
+
+        });
+
+</script>
+
+</body>
+</html>

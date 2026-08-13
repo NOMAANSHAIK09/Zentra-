@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zentra - Store Settings</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f7f9fc;
+            color: #101828;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .zentra-navbar {
+            height: 72px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e9f2;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-inner {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 0;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #101828;
+            min-width: 210px;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            background: #6366f1;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .brand-name {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* Search */
+
+        .search-wrapper {
+            flex: 1;
+            max-width: 635px;
+            position: relative;
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 17px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #71809a;
+            font-size: 18px;
+        }
+
+        .search-input {
+            width: 100%;
+            height: 45px;
+            border: 1px solid #dce3ee;
+            border-radius: 10px;
+            padding: 0 18px 0 47px;
+            font-size: 16px;
+            color: #344054;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
+        }
+
+        /* Navigation */
+
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 27px;
+        }
+
+        .nav-link-custom {
+            color: #596b89;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .nav-link-custom:hover {
+            color: #6366f1;
+        }
+
+        .nav-icon {
+            position: relative;
+            width: 32px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #596b89;
+            font-size: 21px;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 1px;
+            right: -3px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 4px;
+            background: #6366f1;
+            color: white;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-image {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 22px 0 70px;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            margin-bottom: 34px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.7px;
+            margin-bottom: 5px;
+        }
+
+        .page-subtitle {
+            color: #637694;
+            font-size: 16px;
+            margin: 0;
+        }
+
+
+        /* =========================
+           SETTINGS CARD
+        ========================= */
+
+        .settings-card {
+            background: white;
+            border: 1px solid #dfe5ef;
+            border-radius: 16px;
+            padding: 29px 26px;
+            width: 738px;
+            max-width: 100%;
+            margin-bottom: 26px;
+            box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+        }
+
+        .settings-card-title {
+            font-size: 18px;
+            font-weight: 650;
+            margin-bottom: 26px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 7px;
+            color: #101828;
+        }
+
+        .form-control-custom {
+            width: 100%;
+            height: 41px;
+            border: 1px solid #d9e0eb;
+            border-radius: 9px;
+            padding: 0 13px;
+            font-size: 15px;
+            color: #24324a;
+            background: #fff;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-control-custom:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
+        }
+
+        textarea.form-control-custom {
+            height: 86px;
+            padding-top: 11px;
+            resize: vertical;
+        }
+
+
+        /* =========================
+           PAYOUT CARD
+        ========================= */
+
+        .payout-card {
+            background: white;
+            border: 1px solid #dfe5ef;
+            border-radius: 16px;
+            padding: 29px 26px;
+            width: 738px;
+            max-width: 100%;
+            margin-bottom: 26px;
+        }
+
+        .payout-account {
+            position: relative;
+        }
+
+        .payout-account input {
+            padding-right: 50px;
+        }
+
+        .eye-button {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #687894;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           SHIPPING CARD
+        ========================= */
+
+        .shipping-card {
+            background: white;
+            border: 1px solid #dfe5ef;
+            border-radius: 16px;
+            padding: 29px 26px;
+            width: 738px;
+            max-width: 100%;
+        }
+
+
+        /* =========================
+           TOGGLE
+        ========================= */
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 0;
+            border-bottom: 1px solid #eef1f6;
+        }
+
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-title {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .toggle-description {
+            font-size: 13px;
+            color: #71809a;
+        }
+
+        .toggle {
+            position: relative;
+            width: 45px;
+            height: 24px;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: #d5dbea;
+            border-radius: 30px;
+            transition: 0.25s;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.25s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+
+        .toggle input:checked + .slider {
+            background: #6366f1;
+        }
+
+        .toggle input:checked + .slider:before {
+            transform: translateX(21px);
+        }
+
+
+        /* =========================
+           SAVE BUTTON
+        ========================= */
+
+        .save-area {
+            width: 738px;
+            max-width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+
+        .save-btn {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 11px 24px;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .save-btn:hover {
+            background: #5558e8;
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           SUCCESS MESSAGE
+        ========================= */
+
+        .save-message {
+            display: none;
+            margin-top: 15px;
+            width: 738px;
+            max-width: 100%;
+            padding: 12px 15px;
+            border-radius: 9px;
+            background: #ecfdf3;
+            border: 1px solid #b7ebd0;
+            color: #087443;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1250px) {
+
+            .navbar-inner,
+            .main-container {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .brand {
+                min-width: 180px;
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .navbar-inner {
+                gap: 15px;
+            }
+
+            .brand {
+                min-width: auto;
+            }
+
+            .search-wrapper {
+                display: none;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .settings-card,
+            .payout-card,
+            .shipping-card,
+            .save-area,
+            .save-message {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .zentra-navbar {
+                height: auto;
+                padding: 12px 0;
+            }
+
+            .navbar-inner {
+                flex-wrap: wrap;
+            }
+
+            .brand {
+                flex: 1;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .main-container {
+                padding: 20px 15px 50px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .settings-card,
+            .payout-card,
+            .shipping-card {
+                padding: 22px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="zentra-navbar">
+
+    <div class="navbar-inner">
+
+        <!-- Brand -->
+        <a href="#" class="brand">
+
+            <div class="brand-icon">
+                <i class="bi bi-shop"></i>
+            </div>
+
+            <span class="brand-name">
+                Zentra
+            </span>
+
+        </a>
+
+
+        <!-- Search -->
+        <div class="search-wrapper">
+
+            <i class="bi bi-search"></i>
+
+            <input
+                type="text"
+                class="search-input"
+                placeholder="Search products, brands, and categories"
+            >
+
+        </div>
+
+
+        <!-- Navigation -->
+        <div class="nav-links">
+
+            <a href="#" class="nav-link-custom">
+                Explore
+            </a>
+
+            <a href="#" class="nav-link-custom">
+                Sell
+            </a>
+
+
+            <!-- Messages -->
+            <div class="nav-icon">
+
+                <i class="bi bi-chat-left-text"></i>
+
+                <span class="notification-badge">
+                    3
+                </span>
+
+            </div>
+
+
+            <!-- Notifications -->
+            <div class="nav-icon">
+
+                <i class="bi bi-bell"></i>
+
+                <span class="notification-badge">
+                    2
+                </span>
+
+            </div>
+
+
+            <!-- Cart -->
+            <div class="nav-icon">
+
+                <i class="bi bi-cart3"></i>
+
+                <span class="notification-badge">
+                    1
+                </span>
+
+            </div>
+
+
+            <!-- Profile -->
+            <img
+                class="profile-image"
+                src="https://i.pravatar.cc/100?img=12"
+                alt="Profile"
+            >
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<main class="main-container">
+
+
+    <!-- Page Header -->
+
+    <div class="page-header">
+
+        <h1 class="page-title">
+            Store settings
+        </h1>
+
+        <p class="page-subtitle">
+            How your store appears to buyers across Zentra.
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         STORE PROFILE
+    ========================= -->
+
+    <section class="settings-card">
+
+        <h2 class="settings-card-title">
+            Store profile
+        </h2>
+
+
+        <!-- Store Name -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+                Store name
+            </label>
+
+            <input
+                type="text"
+                id="storeName"
+                class="form-control-custom"
+                value="Northline Supply"
+            >
+
+        </div>
+
+
+        <!-- Description -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+                Description
+            </label>
+
+            <textarea
+                id="storeDescription"
+                class="form-control-custom"
+            >Carefully sourced audio and desk gear, shipped within one business day.</textarea>
+
+        </div>
+
+
+        <!-- Support Email -->
+
+        <div class="form-group mb-0">
+
+            <label class="form-label">
+                Support email
+            </label>
+
+            <input
+                type="email"
+                id="supportEmail"
+                class="form-control-custom"
+                value="hello@northline.supply"
+            >
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PAYOUTS
+    ========================= -->
+
+    <section class="payout-card">
+
+        <h2 class="settings-card-title">
+            Payouts
+        </h2>
+
+
+        <div class="form-group">
+
+            <label class="form-label">
+                Payout account
+            </label>
+
+            <div class="payout-account">
+
+                <input
+                    type="password"
+                    id="payoutAccount"
+                    class="form-control-custom"
+                    value="8821"
+                >
+
+                <button
+                    type="button"
+                    class="eye-button"
+                    id="togglePayout"
+                >
+                    <i class="bi bi-eye"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group mb-0">
+
+            <label class="form-label">
+                Payout schedule
+            </label>
+
+            <select
+                id="payoutSchedule"
+                class="form-control-custom"
+            >
+                <option>Daily</option>
+                <option selected>Weekly</option>
+                <option>Monthly</option>
+            </select>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         STORE OPTIONS
+    ========================= -->
+
+    <section class="shipping-card">
+
+        <h2 class="settings-card-title">
+            Store options
+        </h2>
+
+
+        <!-- Option -->
+
+        <div class="toggle-row">
+
+            <div>
+
+                <div class="toggle-title">
+                    Accept orders
+                </div>
+
+                <div class="toggle-description">
+                    Allow buyers to place new orders.
+                </div>
+
+            </div>
+
+
+            <label class="toggle">
+
+                <input
+                    type="checkbox"
+                    checked
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <!-- Option -->
+
+        <div class="toggle-row">
+
+            <div>
+
+                <div class="toggle-title">
+                    Show store publicly
+                </div>
+
+                <div class="toggle-description">
+                    Make your store visible to buyers on Zentra.
+                </div>
+
+            </div>
+
+
+            <label class="toggle">
+
+                <input
+                    type="checkbox"
+                    checked
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <!-- Option -->
+
+        <div class="toggle-row">
+
+            <div>
+
+                <div class="toggle-title">
+                    Email order notifications
+                </div>
+
+                <div class="toggle-description">
+                    Receive an email whenever a new order is placed.
+                </div>
+
+            </div>
+
+
+            <label class="toggle">
+
+                <input
+                    type="checkbox"
+                    checked
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Save -->
+
+    <div class="save-area">
+
+        <button
+            class="save-btn"
+            id="saveSettings"
+        >
+            Save changes
+        </button>
+
+    </div>
+
+
+    <div
+        class="save-message"
+        id="saveMessage"
+    >
+        <i class="bi bi-check-circle me-2"></i>
+        Your store settings have been saved successfully.
+    </div>
+
+
+</main>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    /* =========================
+       PAYOUT VISIBILITY
+    ========================= */
+
+    const payoutInput =
+        document.getElementById("payoutAccount");
+
+    const togglePayout =
+        document.getElementById("togglePayout");
+
+    togglePayout.addEventListener("click", function () {
+
+        const icon =
+            togglePayout.querySelector("i");
+
+        if (payoutInput.type === "password") {
+
+            payoutInput.type = "text";
+
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+
+        } else {
+
+            payoutInput.type = "password";
+
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+
+        }
+
+    });
+
+
+
+    /* =========================
+       SAVE SETTINGS
+    ========================= */
+
+    const saveButton =
+        document.getElementById("saveSettings");
+
+    const saveMessage =
+        document.getElementById("saveMessage");
+
+
+    saveButton.addEventListener("click", function () {
+
+        const storeName =
+            document.getElementById("storeName").value.trim();
+
+        const description =
+            document.getElementById("storeDescription").value.trim();
+
+        const email =
+            document.getElementById("supportEmail").value.trim();
+
+
+        if (!storeName || !description || !email) {
+
+            alert("Please fill in all store profile fields.");
+
+            return;
+
+        }
+
+
+        /* Simulate saving */
+
+        saveButton.innerHTML =
+            '<span class="spinner-border spinner-border-sm me-2"></span>Saving...';
+
+        saveButton.disabled = true;
+
+
+        setTimeout(function () {
+
+            saveButton.innerHTML =
+                '<i class="bi bi-check-lg me-1"></i> Saved';
+
+            saveButton.disabled = false;
+
+            saveMessage.style.display = "block";
+
+
+            setTimeout(function () {
+
+                saveMessage.style.display = "none";
+
+                saveButton.innerHTML =
+                    "Save changes";
+
+            }, 3000);
+
+        }, 900);
+
+    });
+
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    const searchInput =
+        document.querySelector(".search-input");
+
+    searchInput.addEventListener("keydown", function (event) {
+
+        if (event.key === "Enter") {
+
+            const query =
+                searchInput.value.trim();
+
+            if (query) {
+
+                console.log(
+                    "Searching for:",
+                    query
+                );
+
+                alert(
+                    "Search: " + query
+                );
+
+            }
+
+        }
+
+    });
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zentra - Shopping Cart</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <style>
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --text-dark: #111827;
+            --text-muted: #64748b;
+            --bg: #f7f9fc;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text-dark);
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            height: 100%;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 1.45rem;
+            font-weight: 700;
+
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: var(--primary);
+            color: white;
+        }
+
+        .search-container {
+            width: 620px;
+            max-width: 50%;
+        }
+
+        .navbar-search {
+            height: 44px;
+
+            border: 1px solid #dbe2ea;
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 15px;
+
+            background: #fff;
+        }
+
+        .navbar-search i {
+            color: #64748b;
+            margin-right: 12px;
+        }
+
+        .navbar-search input {
+            width: 100%;
+
+            border: none;
+            outline: none;
+
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .nav-link-custom {
+            text-decoration: none;
+            color: #64748b;
+
+            font-weight: 500;
+
+            margin-left: 25px;
+
+            transition: 0.2s;
+        }
+
+        .nav-link-custom:hover {
+            color: var(--primary);
+        }
+
+        .nav-icon {
+            position: relative;
+
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #64748b;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+        }
+
+        .nav-icon:hover {
+            background: #f1f3ff;
+            color: var(--primary);
+        }
+
+        .notification {
+            position: absolute;
+
+            top: -2px;
+            right: -2px;
+
+            width: 18px;
+            height: 18px;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+            color: white;
+
+            font-size: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            margin-left: 12px;
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .cart-page {
+            padding: 38px 0 80px;
+        }
+
+        /* Breadcrumb */
+
+        .breadcrumb-container {
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb {
+            margin-bottom: 0;
+        }
+
+        .breadcrumb-item a {
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: var(--text-dark);
+        }
+
+        /* Heading */
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+
+        /* =========================
+           CART ITEM
+        ========================= */
+
+        .cart-card {
+            background: white;
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            padding: 18px;
+
+            margin-bottom: 18px;
+
+            transition: 0.2s;
+        }
+
+        .cart-card:hover {
+            border-color: #cbd5e1;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .product-image {
+            width: 122px;
+            height: 122px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+        }
+
+        .seller-name {
+            color: #64748b;
+
+            font-size: 0.82rem;
+
+            margin-bottom: 3px;
+        }
+
+        .product-name {
+            font-size: 1rem;
+
+            font-weight: 600;
+
+            margin-bottom: 0;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+        /* Quantity */
+
+        .quantity-control {
+            display: inline-flex;
+
+            align-items: center;
+
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            height: 40px;
+        }
+
+        .quantity-btn {
+            width: 38px;
+            height: 38px;
+
+            border: none;
+
+            background: white;
+
+            font-size: 18px;
+
+            color: #64748b;
+
+            cursor: pointer;
+        }
+
+        .quantity-btn:hover {
+            background: #f1f5f9;
+        }
+
+        .quantity-value {
+            width: 40px;
+
+            text-align: center;
+
+            font-weight: 500;
+        }
+
+        /* Remove */
+
+        .remove-btn {
+            border: none;
+
+            background: transparent;
+
+            color: var(--danger);
+
+            font-size: 0.85rem;
+
+            margin-left: 25px;
+
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           ORDER SUMMARY
+        ========================= */
+
+        .summary-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            padding: 26px;
+
+            position: sticky;
+            top: 95px;
+        }
+
+        .summary-title {
+            font-size: 1.2rem;
+
+            font-weight: 600;
+
+            margin-bottom: 25px;
+        }
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 17px;
+
+            color: #64748b;
+
+            font-size: 0.95rem;
+        }
+
+        .summary-row strong {
+            color: var(--text-dark);
+
+            font-weight: 500;
+        }
+
+        .free-delivery {
+            color: var(--success) !important;
+        }
+
+        .summary-divider {
+            border: none;
+
+            border-top: 1px solid var(--border);
+
+            margin: 20px 0;
+        }
+
+        .total-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 1.15rem;
+
+            font-weight: 600;
+
+            margin-bottom: 20px;
+        }
+
+        /* Delivery Box */
+
+        .delivery-box {
+            display: flex;
+
+            gap: 12px;
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            background: #ecfdf5;
+
+            color: #059669;
+
+            margin-bottom: 22px;
+        }
+
+        .delivery-icon {
+            font-size: 1.2rem;
+        }
+
+        .delivery-text {
+            font-size: 0.82rem;
+
+            line-height: 1.4;
+        }
+
+        .delivery-text strong {
+            display: block;
+
+            font-size: 0.9rem;
+        }
+
+        /* Checkout */
+
+        .checkout-btn {
+            width: 100%;
+
+            border: none;
+
+            background: var(--primary);
+
+            color: white;
+
+            padding: 13px;
+
+            border-radius: 10px;
+
+            font-size: 1rem;
+
+            font-weight: 600;
+
+            transition: 0.25s;
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary-dark);
+
+            transform: translateY(-1px);
+
+            box-shadow: 0 8px 20px rgba(99,102,241,0.25);
+        }
+
+        .continue-shopping {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 17px;
+
+            color: #64748b;
+
+            text-decoration: none;
+
+            font-size: 0.9rem;
+        }
+
+        .continue-shopping:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           EMPTY CART
+        ========================= */
+
+        .empty-cart {
+            display: none;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            padding: 70px 20px;
+
+            text-align: center;
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+
+            color: #cbd5e1;
+
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h3 {
+            font-size: 1.4rem;
+
+            margin-bottom: 10px;
+        }
+
+        .empty-cart p {
+            color: #64748b;
+
+            margin-bottom: 25px;
+        }
+
+        .browse-btn {
+            display: inline-block;
+
+            padding: 11px 25px;
+
+            background: var(--primary);
+
+            color: white;
+
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            font-weight: 500;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 991px) {
+
+            .search-container {
+                display: none;
+            }
+
+            .nav-link-custom {
+                display: none;
+            }
+
+            .summary-card {
+                position: static;
+
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 575px) {
+
+            .navbar {
+                height: 65px;
+            }
+
+            .cart-page {
+                padding-top: 25px;
+            }
+
+            .page-title {
+                font-size: 1.6rem;
+            }
+
+            .cart-card {
+                padding: 14px;
+            }
+
+            .product-image {
+                width: 90px;
+                height: 90px;
+            }
+
+            .product-price {
+                margin-top: 8px;
+            }
+
+            .remove-btn {
+                margin-left: 10px;
+            }
+
+            .profile {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <!-- Logo -->
+
+        <a href="#" class="navbar-brand">
+
+            <span class="brand-icon">
+                <i class="fas fa-store"></i>
+            </span>
+
+            Zentra
+
+        </a>
+
+
+        <!-- Search -->
+
+        <div class="search-container">
+
+            <div class="navbar-search">
+
+                <i class="fas fa-search"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search products, brands, and categories"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <div class="d-flex align-items-center">
+
+            <a href="#" class="nav-link-custom">
+                Explore
+            </a>
+
+            <a href="#" class="nav-link-custom">
+                Sell
+            </a>
+
+
+            <!-- Messages -->
+
+            <div class="nav-icon ms-3">
+
+                <a href="message.html"><i class="far fa-comment"></i></a>
+
+                <span class="notification">
+                    3
+                </span>
+
+            </div>
+
+
+            <!-- Notifications -->
+
+            <div class="nav-icon ms-2">
+
+                <i class="far fa-bell"></i>
+
+                <span class="notification">
+                    2
+                </span>
+
+            </div>
+
+
+            <!-- Cart -->
+
+            <div class="nav-icon ms-2"
+                 style="background:#eef0ff;color:#6366f1;">
+
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+
+                <span class="notification">
+                    1
+                </span>
+
+            </div>
+
+
+            <!-- Profile -->
+
+            <a href="profile.html">
+                <img
+                    src="https://i.pravatar.cc/100?img=12"
+                    class="profile"
+                    alt="Profile"
+                >
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     CART PAGE
+========================= -->
+
+<main class="cart-page">
+
+    <div class="container">
+
+
+        <!-- Breadcrumb -->
+
+        <div class="breadcrumb-container">
+
+            <nav aria-label="breadcrumb">
+
+                <ol class="breadcrumb">
+
+                    <li class="breadcrumb-item">
+                        <a href="#">Home</a>
+                    </li>
+
+                    <li class="breadcrumb-item active">
+                        Cart
+                    </li>
+
+                </ol>
+
+            </nav>
+
+        </div>
+
+
+        <!-- Page Title -->
+
+        <h1 class="page-title">
+            Shopping cart
+        </h1>
+
+
+
+        <div class="row g-4">
+
+
+            <!-- =====================
+                 LEFT SIDE
+            ====================== -->
+
+            <div class="col-lg-8">
+
+                <div id="cartItems">
+
+
+                    <!-- PRODUCT 1 -->
+
+                    <div class="cart-card cart-item">
+
+                        <div class="row align-items-center g-3">
+
+
+                            <!-- Image -->
+
+                            <div class="col-auto">
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80"
+                                    class="product-image"
+                                    alt="Headphones"
+                                >
+
+                            </div>
+
+
+                            <!-- Product Info -->
+
+                            <div class="col">
+
+                                <div class="seller-name">
+                                    Northwave Audio
+                                </div>
+
+                                <h3 class="product-name">
+                                    Aurora ANC Over-Ear Headphones
+                                </h3>
+
+
+                                <!-- Controls -->
+
+                                <div class="d-flex align-items-center mt-4">
+
+                                    <div class="quantity-control">
+
+                                        <button
+                                            class="quantity-btn minus"
+                                        >
+                                            −
+                                        </button>
+
+                                        <span class="quantity-value">
+                                            1
+                                        </span>
+
+                                        <button
+                                            class="quantity-btn plus"
+                                        >
+                                            +
+                                        </button>
+
+                                    </div>
+
+
+                                    <button
+                                        class="remove-btn"
+                                    >
+
+                                        <i class="far fa-trash-alt me-1"></i>
+
+                                        Remove
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Price -->
+
+                            <div class="col-auto align-self-start">
+
+                                <div class="product-price">
+                                    $249
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PRODUCT 2 -->
+
+                    <div class="cart-card cart-item">
+
+                        <div class="row align-items-center g-3">
+
+
+                            <div class="col-auto">
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80"
+                                    class="product-image"
+                                    alt="Smart Watch"
+                                >
+
+                            </div>
+
+
+                            <div class="col">
+
+                                <div class="seller-name">
+                                    TimeCraft
+                                </div>
+
+                                <h3 class="product-name">
+                                    Horizon Smart Watch
+                                </h3>
+
+
+                                <div class="d-flex align-items-center mt-4">
+
+                                    <div class="quantity-control">
+
+                                        <button
+                                            class="quantity-btn minus"
+                                        >
+                                            −
+                                        </button>
+
+                                        <span class="quantity-value">
+                                            1
+                                        </span>
+
+                                        <button
+                                            class="quantity-btn plus"
+                                        >
+                                            +
+                                        </button>
+
+                                    </div>
+
+
+                                    <button
+                                        class="remove-btn"
+                                    >
+
+                                        <i class="far fa-trash-alt me-1"></i>
+
+                                        Remove
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-auto align-self-start">
+
+                                <div class="product-price">
+                                    $189
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- EMPTY CART -->
+
+                <div
+                    id="emptyCart"
+                    class="empty-cart"
+                >
+
+                    <i class="fas fa-shopping-cart"></i>
+
+                    <h3>
+                        Your cart is empty
+                    </h3>
+
+                    <p>
+                        Looks like you haven't added anything yet.
+                    </p>
+
+                    <a href="#" class="browse-btn">
+                        Explore Products
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================
+                 RIGHT SIDE
+            ====================== -->
+
+            <div class="col-lg-4">
+
+                <div class="summary-card">
+
+
+                    <h2 class="summary-title">
+                        Order summary
+                    </h2>
+
+
+                    <!-- Subtotal -->
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="subtotal">
+                            $438
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Delivery -->
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <strong class="free-delivery">
+                            Free
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Tax -->
+
+                    <div class="summary-row">
+
+                        <span>
+                            Estimated tax
+                        </span>
+
+                        <strong id="tax">
+                            $35
+                        </strong>
+
+                    </div>
+
+
+                    <hr class="summary-divider">
+
+
+                    <!-- Total -->
+
+                    <div class="total-row">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <span id="total">
+                            $473
+                        </span>
+
+                    </div>
+
+
+                    <!-- Delivery Information -->
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-icon">
+
+                            <i class="fas fa-truck"></i>
+
+                        </div>
+
+                        <div class="delivery-text">
+
+                            <strong>
+                                Arrives Wed, Aug 12
+                            </strong>
+
+                            Free delivery on your order.
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Checkout -->
+
+                    <button
+                        class="checkout-btn"
+                        onclick="checkout()"
+                    >
+
+                        Proceed to checkout
+
+                        <a href="checkout.html"><i class="fas fa-arrow-right ms-2"></i></a>
+
+                    </button>
+
+
+                    <a
+                        href="index.html"
+                        class="continue-shopping"
+                    >
+
+                        ← Continue shopping
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    /* =========================
+       QUANTITY
+    ========================= */
+
+    document.querySelectorAll('.cart-item').forEach(item => {
+
+        const minus =
+            item.querySelector('.minus');
+
+        const plus =
+            item.querySelector('.plus');
+
+        const quantity =
+            item.querySelector('.quantity-value');
+
+
+        minus.addEventListener('click', () => {
+
+            let value =
+                parseInt(quantity.textContent);
+
+            if (value > 1) {
+
+                value--;
+
+                quantity.textContent = value;
+
+            }
+
+        });
+
+
+        plus.addEventListener('click', () => {
+
+            let value =
+                parseInt(quantity.textContent);
+
+            value++;
+
+            quantity.textContent = value;
+
+        });
+
+    });
+
+
+
+    /* =========================
+       REMOVE PRODUCT
+    ========================= */
+
+    document.querySelectorAll('.remove-btn')
+        .forEach(button => {
+
+            button.addEventListener('click', function() {
+
+                const item =
+                    this.closest('.cart-item');
+
+                item.style.opacity = '0';
+
+                item.style.transform =
+                    'translateX(30px)';
+
+                item.style.transition =
+                    'all 0.3s ease';
+
+
+                setTimeout(() => {
+
+                    item.remove();
+
+                    checkEmptyCart();
+
+                }, 300);
+
+            });
+
+        });
+
+
+
+    /* =========================
+       EMPTY CART
+    ========================= */
+
+    function checkEmptyCart() {
+
+        const items =
+            document.querySelectorAll('.cart-item');
+
+        if (items.length === 0) {
+
+            document.getElementById('cartItems')
+                .style.display = 'none';
+
+            document.getElementById('emptyCart')
+                .style.display = 'block';
+
+        }
+
+    }
+
+
+
+    /* =========================
+       CHECKOUT
+    ========================= */
+
+    function checkout() {
+
+        alert(
+            "Checkout page will be connected here."
+        );
+
+    }
+
+</script>
+
+
+</body>
+</html>

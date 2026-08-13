@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zentra | Marketplace</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================
+           GLOBAL
+        ========================= */
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #5558e8;
+
+            --text-dark: #111827;
+            --text-medium: #64748b;
+            --text-light: #94a3b8;
+
+            --background: #f8fafc;
+            --white: #ffffff;
+
+            --border: #e2e8f0;
+
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text-dark);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .main-navbar {
+            height: 72px;
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid var(--border);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-inner {
+            width: 100%;
+            max-width: 1350px;
+            margin: auto;
+
+            padding: 0 24px;
+
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+
+        /* LOGO */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 21px;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+
+            background: var(--primary);
+
+            color: white;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 16px;
+
+            box-shadow: 0 4px 12px rgba(99,102,241,0.25);
+        }
+
+
+        /* SEARCH */
+
+        .navbar-search {
+            flex: 1;
+            max-width: 620px;
+            position: relative;
+        }
+
+        .navbar-search input {
+            width: 100%;
+            height: 42px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            padding: 0 18px 0 46px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        .navbar-search input:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(99,102,241,0.08);
+        }
+
+        .navbar-search i {
+            position: absolute;
+
+            left: 17px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--text-light);
+
+            font-size: 15px;
+        }
+
+
+        /* NAV LINKS */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+
+            margin-left: auto;
+        }
+
+        .nav-link-custom {
+            font-size: 14px;
+            font-weight: 500;
+
+            color: #64748b;
+
+            transition: 0.2s;
+        }
+
+        .nav-link-custom:hover {
+            color: var(--primary);
+        }
+
+
+        /* NAV ICONS */
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            color: #475569;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .notification-count {
+            position: absolute;
+
+            top: -5px;
+            right: -7px;
+
+            min-width: 17px;
+            height: 17px;
+
+            padding: 0 4px;
+
+            background: var(--primary);
+
+            color: white;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* PROFILE */
+
+        .profile-avatar {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid white;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main-container {
+            max-width: 1350px;
+
+            margin: auto;
+
+            padding: 34px 24px 80px;
+        }
+
+
+        /* =========================
+           WELCOME CARD
+        ========================= */
+
+        .welcome-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            padding: 28px;
+
+            margin-bottom: 26px;
+
+            box-shadow: 0 2px 5px rgba(15,23,42,0.03);
+        }
+
+        .welcome-title {
+            font-size: 23px;
+            font-weight: 700;
+
+            margin-bottom: 6px;
+        }
+
+        .welcome-text {
+            color: var(--text-medium);
+
+            font-size: 14px;
+
+            margin-bottom: 22px;
+        }
+
+
+        /* BUTTONS */
+
+        .btn-zentra {
+            background: var(--primary);
+
+            color: white;
+
+            border: none;
+
+            border-radius: 8px;
+
+            padding: 10px 17px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
+        .btn-zentra:hover {
+            background: var(--primary-dark);
+
+            color: white;
+
+            transform: translateY(-1px);
+        }
+
+        .btn-outline-zentra {
+            background: white;
+
+            color: #334155;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            padding: 10px 17px;
+
+            font-size: 14px;
+            font-weight: 500;
+
+            transition: 0.2s;
+        }
+
+        .btn-outline-zentra:hover {
+            border-color: var(--primary);
+
+            color: var(--primary);
+        }
+
+
+        /* =========================
+           CATEGORY
+        ========================= */
+
+        .category-container {
+            display: flex;
+
+            gap: 9px;
+
+            overflow-x: auto;
+
+            padding-bottom: 5px;
+
+            margin-bottom: 40px;
+
+            scrollbar-width: none;
+        }
+
+        .category-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-pill {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            color: #64748b;
+
+            border-radius: 30px;
+
+            padding: 9px 18px;
+
+            font-size: 13px;
+
+            white-space: nowrap;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .category-pill:hover {
+            border-color: var(--primary);
+
+            color: var(--primary);
+        }
+
+        .category-pill.active {
+            background: #eef2ff;
+
+            border-color: #c7d2fe;
+
+            color: var(--primary);
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           SECTION HEADER
+        ========================= */
+
+        .section-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+        .section-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            width: 36px;
+            height: 36px;
+
+            border-radius: 9px;
+
+            background: #eef2ff;
+
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+
+            margin-bottom: 2px;
+        }
+
+        .section-description {
+            font-size: 13px;
+            color: var(--text-medium);
+        }
+
+        .see-all {
+            color: #334155;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            transition: 0.2s;
+        }
+
+        .see-all:hover {
+            color: var(--primary);
+        }
+
+
+        /* =========================
+           PRODUCT CARD
+        ========================= */
+
+        .product-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 15px 35px rgba(15,23,42,0.10);
+        }
+
+
+        /* PRODUCT IMAGE */
+
+        .product-image-wrapper {
+            height: 245px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background: #f1f5f9;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.04);
+        }
+
+
+        /* DISCOUNT */
+
+        .discount-badge {
+            position: absolute;
+
+            top: 12px;
+            left: 12px;
+
+            background: #ef4444;
+
+            color: white;
+
+            border-radius: 6px;
+
+            padding: 5px 8px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        /* WISHLIST */
+
+        .wishlist-btn {
+            position: absolute;
+
+            top: 12px;
+            right: 12px;
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.95);
+
+            border: none;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #64748b;
+
+            cursor: pointer;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+
+            transition: 0.2s;
+        }
+
+        .wishlist-btn:hover,
+        .wishlist-btn.active {
+            color: #ef4444;
+        }
+
+
+        /* PRODUCT BODY */
+
+        .product-body {
+            padding: 17px;
+        }
+
+        .product-category {
+            font-size: 11px;
+
+            color: var(--text-light);
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+            margin-bottom: 5px;
+        }
+
+        .product-name {
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #1e293b;
+
+            margin-bottom: 8px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+        .product-rating {
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            font-size: 12px;
+
+            margin-bottom: 9px;
+        }
+
+        .stars {
+            color: #f59e0b;
+        }
+
+        .rating-number {
+            color: var(--text-medium);
+        }
+
+        .product-price {
+            font-size: 17px;
+
+            font-weight: 700;
+
+            color: #111827;
+        }
+
+        .old-price {
+            font-size: 12px;
+
+            color: #94a3b8;
+
+            text-decoration: line-through;
+
+            margin-left: 6px;
+        }
+/* =====================================================
+   MARKETPLACE SECTIONS
+===================================================== */
+
+.market-section {
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
+.section-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 5px;
+}
+
+.section-subheading {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+
+/* =====================================================
+   TRENDING BADGE
+===================================================== */
+
+.trending-badge {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    background: #111827;
+    color: white;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.trending-badge i {
+    color: #f97316;
+    margin-right: 3px;
+}
+
+
+/* =====================================================
+   CATEGORY CARDS
+===================================================== */
+
+.category-card {
+    min-height: 160px;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    position: relative;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(15,23,42,0.10);
+}
+
+.category-card h4 {
+    margin-top: 15px;
+
+    margin-bottom: 4px;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.category-card p {
+    margin: 0;
+
+    font-size: 12px;
+
+    opacity: 0.7;
+}
+
+.category-card-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,0.75);
+
+    border-radius: 11px;
+
+    font-size: 18px;
+}
+
+.category-purple {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.category-blue {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.category-orange {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.category-green {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.category-arrow {
+    font-size: 14px;
+
+    margin-bottom: 5px;
+
+    opacity: 0.6;
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED
+===================================================== */
+
+.recently-viewed {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.recent-item {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+
+    padding: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    transition: 0.2s;
+}
+
+.recent-item:hover {
+    border-color: #c7d2fe;
+
+    transform: translateY(-2px);
+}
+
+.recent-item img {
+    width: 65px;
+    height: 65px;
+
+    object-fit: cover;
+
+    border-radius: 9px;
+}
+
+.recent-item h6 {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 7px;
+}
+
+.recent-item strong {
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   SELLER CTA
+===================================================== */
+
+.seller-cta {
+    margin-top: 80px;
+
+    margin-bottom: 80px;
+
+    min-height: 300px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #111827,
+            #1e1b4b
+        );
+
+    border-radius: 22px;
+
+    padding: 50px;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+.seller-cta-content {
+    max-width: 580px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.seller-label {
+    color: #a5b4fc;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.seller-cta h2 {
+    font-size: 32px;
+
+    line-height: 1.2;
+
+    margin: 12px 0;
+
+    font-weight: 700;
+}
+
+.seller-cta p {
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+}
+
+.seller-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    background: white;
+
+    color: #111827;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.seller-btn:hover {
+    transform: translateY(-2px);
+
+    color: #111827;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+
+/* Seller visual */
+
+.seller-visual {
+    width: 380px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.seller-stat {
+    background: rgba(255,255,255,0.09);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(15px);
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    width: 230px;
+
+    margin-left: auto;
+
+    margin-bottom: 15px;
+}
+
+.seller-stat span {
+    display: block;
+
+    font-size: 11px;
+
+    color: #94a3b8;
+
+    margin-bottom: 7px;
+}
+
+.seller-stat strong {
+    display: block;
+
+    font-size: 23px;
+
+    margin-bottom: 7px;
+}
+
+.seller-stat small {
+    color: #34d399;
+
+    font-size: 11px;
+}
+
+
+/* Chart */
+
+.seller-chart {
+    height: 100px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.seller-chart div {
+    width: 28px;
+
+    border-radius: 5px 5px 0 0;
+
+    background: #818cf8;
+
+    opacity: 0.8;
+}
+
+.seller-chart div:nth-child(1) {
+    height: 35%;
+}
+
+.seller-chart div:nth-child(2) {
+    height: 50%;
+}
+
+.seller-chart div:nth-child(3) {
+    height: 42%;
+}
+
+.seller-chart div:nth-child(4) {
+    height: 65%;
+}
+
+.seller-chart div:nth-child(5) {
+    height: 55%;
+}
+
+.seller-chart div:nth-child(6) {
+    height: 80%;
+}
+
+.seller-chart div:nth-child(7) {
+    height: 95%;
+}
+
+
+/* =====================================================
+   BENEFITS
+===================================================== */
+
+.benefit-card {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    height: 100%;
+
+    transition: 0.25s;
+}
+
+.benefit-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 30px rgba(15,23,42,0.07);
+}
+
+.benefit-icon {
+    width: 42px;
+    height: 42px;
+
+    background: #eef2ff;
+
+    color: var(--primary);
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 17px;
+}
+
+.benefit-card h5 {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+.benefit-card p {
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin: 0;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .market-section {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .recently-viewed {
+        grid-template-columns: 1fr;
+    }
+
+    .seller-cta {
+        padding: 35px 25px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 35px;
+    }
+
+    .seller-cta h2 {
+        font-size: 25px;
+    }
+
+    .seller-visual {
+        width: 100%;
+    }
+
+    .seller-stat {
+        margin-left: 0;
+    }
+
+}
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .navbar-inner {
+                gap: 18px;
+            }
+
+            .navbar-search {
+                max-width: 450px;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+
+            .main-navbar {
+                height: auto;
+
+                padding: 12px 0;
+            }
+
+            .navbar-inner {
+                flex-wrap: wrap;
+
+                gap: 12px;
+            }
+
+            .navbar-search {
+                order: 3;
+
+                flex-basis: 100%;
+
+                max-width: none;
+            }
+
+            .nav-links {
+                margin-left: auto;
+            }
+
+            .nav-link-custom {
+                display: none;
+            }
+
+            .main-container {
+                padding: 22px 15px 60px;
+            }
+
+            .welcome-card {
+                padding: 22px;
+            }
+
+            .welcome-title {
+                font-size: 20px;
+            }
+
+            .product-image-wrapper {
+                height: 210px;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+
+            .navbar-inner {
+                padding: 0 15px;
+            }
+
+            .nav-actions {
+                gap: 12px;
+            }
+
+            .profile-avatar {
+                width: 34px;
+                height: 34px;
+            }
+
+            .welcome-card .d-flex {
+                flex-direction: column;
+            }
+
+            .welcome-card .btn-zentra,
+            .welcome-card .btn-outline-zentra {
+                width: 100%;
+            }
+
+            .section-title {
+                font-size: 16px;
+            }
+
+            .section-description {
+                font-size: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="main-navbar">
+
+    <div class="navbar-inner">
+
+        <!-- Logo -->
+        <a href="#" class="brand">
+
+            <span class="brand-icon">
+                <i class="fa-solid fa-store"></i>
+            </span>
+
+            Zentra
+
+        </a>
+
+
+        <!-- Search -->
+        <div class="navbar-search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products, brands, and categories"
+            >
+
+        </div>
+
+
+        <!-- Navigation -->
+        <div class="nav-links">
+
+            <a href="#" class="nav-link-custom">
+                Explore
+            </a>
+
+            <a href="#" class="nav-link-custom">
+                Sell
+            </a>
+
+        </div>
+
+
+        <!-- Actions -->
+        <div class="nav-actions">
+
+            <!-- Messages -->
+            <div class="nav-icon">
+
+                <a href="message.html"><i class="fa-regular fa-comment"></i></a>
+
+                <span class="notification-count">
+                    3
+                </span>
+
+            </div>
+
+
+            <!-- Notifications -->
+            <div class="nav-icon">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-count">
+                    2
+                </span>
+
+            </div>
+
+
+            <!-- Cart -->
+            <div class="nav-icon">
+
+                <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+
+            </div>
+
+
+            <!-- Profile -->
+         <a href="profile.html">   <img
+                class="profile-avatar"
+                src="https://i.pravatar.cc/100?img=12"
+                alt="Profile"
+            ></a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main-container">
+
+
+    <!-- =================================================
+         WELCOME
+    ================================================== -->
+
+    <section class="welcome-card">
+
+        <h1 class="welcome-title">
+            Welcome back, Alex
+        </h1>
+
+        <p class="welcome-text">
+            You have 2 orders on the way. Pick up where you left off.
+        </p>
+
+
+        <div class="d-flex gap-2">
+
+            <a href="#" class="btn-zentra">
+                Explore products
+            </a>
+
+            <a href="#" class="btn-outline-zentra">
+                Track my orders
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CATEGORIES
+    ================================================== -->
+
+    <div class="category-container">
+
+        <button class="category-pill active">
+            All categories
+        </button>
+
+        <button class="category-pill">
+            Audio
+        </button>
+
+        <button class="category-pill">
+            Wearables
+        </button>
+
+        <button class="category-pill">
+            Computing
+        </button>
+
+        <button class="category-pill">
+            Photography
+        </button>
+
+        <button class="category-pill">
+            Footwear
+        </button>
+
+        <button class="category-pill">
+            Bags
+        </button>
+
+        <button class="category-pill">
+            Eyewear
+        </button>
+
+        <button class="category-pill">
+            Home
+        </button>
+
+    </div>
+
+
+
+    <!-- =================================================
+         RECOMMENDED
+    ================================================== -->
+
+    <section>
+
+        <div class="section-header">
+
+            <div class="section-title-wrapper">
+
+                <div class="section-icon">
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                </div>
+
+                <div>
+
+                    <h2 class="section-title">
+                        Recommended for you
+                    </h2>
+
+                    <p class="section-description">
+                        Based on what you've viewed and bought.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a href="#" class="see-all">
+                See all
+                <i class="fa-solid fa-arrow-right ms-1"></i>
+            </a>
+
+        </div>
+
+
+
+        <!-- PRODUCTS -->
+
+        <div class="row g-3" id="productContainer">
+
+
+            <!-- PRODUCT 1 -->
+
+            <div
+                class="col-xl-3 col-lg-4 col-md-6 product-item"
+                data-name="premium wireless headphones"
+                data-category="audio"
+            >
+
+                <div class="product-card">
+
+                    <div class="product-image-wrapper">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"
+                            class="product-image"
+                            alt="Wireless headphones"
+                        >
+
+                        <span class="discount-badge">
+                            Save $70
+                        </span>
+
+                        <button class="wishlist-btn">
+
+                            <i class="fa-regular fa-heart"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="product-body">
+
+                        <div class="product-category">
+                            Audio
+                        </div>
+
+                        <div class="product-name">
+                            Premium Wireless Headphones
+                        </div>
+
+                        <div class="product-rating">
+
+                            <span class="stars">
+                                ★★★★★
+                            </span>
+
+                            <span class="rating-number">
+                                4.8
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <span class="product-price">
+                                $129
+                            </span>
+
+                            <span class="old-price">
+                                $199
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PRODUCT 2 -->
+
+            <div
+                class="col-xl-3 col-lg-4 col-md-6 product-item"
+                data-name="smart watch"
+                data-category="wearables"
+            >
+
+                <div class="product-card">
+
+                    <div class="product-image-wrapper">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
+                            class="product-image"
+                            alt="Smart watch"
+                        >
+
+                        <button class="wishlist-btn active">
+
+                            <i class="fa-solid fa-heart"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="product-body">
+
+                        <div class="product-category">
+                            Wearables
+                        </div>
+
+                        <div class="product-name">
+                            Minimal Smart Watch
+                        </div>
+
+                        <div class="product-rating">
+
+                            <span class="stars">
+                                ★★★★★
+                            </span>
+
+                            <span class="rating-number">
+                                4.7
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <span class="product-price">
+                                $189
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PRODUCT 3 -->
+
+            <div
+                class="col-xl-3 col-lg-4 col-md-6 product-item"
+                data-name="premium laptop"
+                data-category="computing"
+            >
+
+                <div class="product-card">
+
+                    <div class="product-image-wrapper">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80"
+                            class="product-image"
+                            alt="Laptop"
+                        >
+
+                        <button class="wishlist-btn">
+
+                            <i class="fa-regular fa-heart"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="product-body">
+
+                        <div class="product-category">
+                            Computing
+                        </div>
+
+                        <div class="product-name">
+                            Pro Performance Laptop
+                        </div>
+
+                        <div class="product-rating">
+
+                            <span class="stars">
+                                ★★★★★
+                            </span>
+
+                            <span class="rating-number">
+                                4.9
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <span class="product-price">
+                                $1,299
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PRODUCT 4 -->
+
+            <div
+                class="col-xl-3 col-lg-4 col-md-6 product-item"
+                data-name="running shoes"
+                data-category="footwear"
+            >
+
+                <div class="product-card">
+
+                    <div class="product-image-wrapper">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+                            class="product-image"
+                            alt="Running shoes"
+                        >
+
+                        <button class="wishlist-btn">
+
+                            <i class="fa-regular fa-heart"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="product-body">
+
+                        <div class="product-category">
+                            Footwear
+                        </div>
+
+                        <div class="product-name">
+                            Performance Running Shoes
+                        </div>
+
+                        <div class="product-rating">
+
+                            <span class="stars">
+                                ★★★★★
+                            </span>
+
+                            <span class="rating-number">
+                                4.6
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <span class="product-price">
+                                $109
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+<!-- =====================================================
+     TRENDING PRODUCTS
+===================================================== -->
+
+<section class="market-section">
+
+    <div class="section-header">
+
+        <div>
+            <h2 class="section-heading">
+                Trending now
+            </h2>
+
+            <p class="section-subheading">
+                Popular products people are buying right now.
+            </p>
+        </div>
+
+        <a href="#" class="see-all">
+            View all
+            <i class="fa-solid fa-arrow-right ms-1"></i>
+        </a>
+
+    </div>
+
+
+    <div class="row g-3">
+
+        <!-- Trending Product -->
+
+        <div class="col-xl-3 col-lg-4 col-md-6">
+
+            <div class="product-card">
+
+                <div class="product-image-wrapper">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1546868871-7041f2a55e2f?auto=format&fit=crop&w=800&q=80"
+                        class="product-image"
+                        alt="Smartwatch"
+                    >
+
+                    <span class="trending-badge">
+                        <i class="fa-solid fa-fire"></i>
+                        Trending
+                    </span>
+
+                    <button class="wishlist-btn">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+
+                </div>
+
+                <div class="product-body">
+
+                    <div class="product-category">
+                        Wearables
+                    </div>
+
+                    <div class="product-name">
+                        Advanced Fitness Smartwatch
+                    </div>
+
+                    <div class="product-rating">
+
+                        <span class="stars">
+                            ★★★★★
+                        </span>
+
+                        <span class="rating-number">
+                            4.9
+                        </span>
+
+                    </div>
+
+                    <span class="product-price">
+                        $249
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Product -->
+
+        <div class="col-xl-3 col-lg-4 col-md-6">
+
+            <div class="product-card">
+
+                <div class="product-image-wrapper">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80"
+                        class="product-image"
+                        alt="Smartphone"
+                    >
+
+                    <button class="wishlist-btn">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="product-body">
+
+                    <div class="product-category">
+                        Electronics
+                    </div>
+
+                    <div class="product-name">
+                        Next Generation Smartphone
+                    </div>
+
+                    <div class="product-rating">
+
+                        <span class="stars">
+                            ★★★★★
+                        </span>
+
+                        <span class="rating-number">
+                            4.8
+                        </span>
+
+                    </div>
+
+                    <span class="product-price">
+                        $799
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Product -->
+
+        <div class="col-xl-3 col-lg-4 col-md-6">
+
+            <div class="product-card">
+
+                <div class="product-image-wrapper">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
+                        class="product-image"
+                        alt="T-shirt"
+                    >
+
+                    <span class="discount-badge">
+                        20% OFF
+                    </span>
+
+                    <button class="wishlist-btn">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="product-body">
+
+                    <div class="product-category">
+                        Fashion
+                    </div>
+
+                    <div class="product-name">
+                        Premium Cotton T-Shirt
+                    </div>
+
+                    <div class="product-rating">
+
+                        <span class="stars">
+                            ★★★★★
+                        </span>
+
+                        <span class="rating-number">
+                            4.7
+                        </span>
+
+                    </div>
+
+                    <span class="product-price">
+                        $39
+                    </span>
+
+                    <span class="old-price">
+                        $49
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Product -->
+
+        <div class="col-xl-3 col-lg-4 col-md-6">
+
+            <div class="product-card">
+
+                <div class="product-image-wrapper">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80"
+                        class="product-image"
+                        alt="Travel bag"
+                    >
+
+                    <button class="wishlist-btn">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="product-body">
+
+                    <div class="product-category">
+                        Bags
+                    </div>
+
+                    <div class="product-name">
+                        Everyday Travel Backpack
+                    </div>
+
+                    <div class="product-rating">
+
+                        <span class="stars">
+                            ★★★★★
+                        </span>
+
+                        <span class="rating-number">
+                            4.6
+                        </span>
+
+                    </div>
+
+                    <span class="product-price">
+                        $89
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SHOP BY CATEGORY
+===================================================== -->
+
+<section class="market-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2 class="section-heading">
+                Shop by category
+            </h2>
+
+            <p class="section-subheading">
+                Find exactly what you're looking for.
+            </p>
+
+        </div>
+
+        <a href="#" class="see-all">
+            All categories
+            <i class="fa-solid fa-arrow-right ms-1"></i>
+        </a>
+
+    </div>
+
+
+    <div class="row g-3">
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="category-card category-purple">
+
+                <div>
+                    <span class="category-card-icon">
+                        <i class="fa-solid fa-headphones"></i>
+                    </span>
+
+                    <h4>Audio</h4>
+
+                    <p>2,450 products</p>
+                </div>
+
+                <i class="fa-solid fa-arrow-right category-arrow"></i>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="category-card category-blue">
+
+                <div>
+
+                    <span class="category-card-icon">
+                        <i class="fa-solid fa-laptop"></i>
+                    </span>
+
+                    <h4>Computing</h4>
+
+                    <p>3,820 products</p>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-right category-arrow"></i>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="category-card category-orange">
+
+                <div>
+
+                    <span class="category-card-icon">
+                        <i class="fa-solid fa-shirt"></i>
+                    </span>
+
+                    <h4>Fashion</h4>
+
+                    <p>8,230 products</p>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-right category-arrow"></i>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="category-card category-green">
+
+                <div>
+
+                    <span class="category-card-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </span>
+
+                    <h4>Home</h4>
+
+                    <p>5,640 products</p>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-right category-arrow"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RECENTLY VIEWED
+===================================================== -->
+
+<section class="market-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2 class="section-heading">
+                Recently viewed
+            </h2>
+
+            <p class="section-subheading">
+                Pick up where you left off.
+            </p>
+
+        </div>
+
+        <a href="#" class="see-all">
+            View history
+        </a>
+
+    </div>
+
+
+    <div class="recently-viewed">
+
+        <div class="recent-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80"
+                alt=""
+            >
+
+            <div>
+
+                <h6>Wireless Headphones</h6>
+
+                <strong>$129</strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="recent-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=300&q=80"
+                alt=""
+            >
+
+            <div>
+
+                <h6>Pro Laptop</h6>
+
+                <strong>$1,299</strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="recent-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80"
+                alt=""
+            >
+
+            <div>
+
+                <h6>Smart Watch</h6>
+
+                <strong>$189</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SELLER CTA
+===================================================== -->
+
+<section class="seller-cta">
+
+    <div class="seller-cta-content">
+
+        <span class="seller-label">
+            FOR SELLERS
+        </span>
+
+        <h2>
+            Turn your products into your next opportunity.
+        </h2>
+
+        <p>
+            Reach thousands of customers, manage your products,
+            track your sales, and grow your business with Zentra.
+        </p>
+
+        <a href="#" class="seller-btn">
+            Start selling
+            <i class="fa-solid fa-arrow-right ms-2"></i>
+        </a>
+
+    </div>
+
+
+    <div class="seller-visual">
+
+        <div class="seller-stat">
+
+            <span>
+                Monthly sales
+            </span>
+
+            <strong>
+                $24,680
+            </strong>
+
+            <small>
+                <i class="fa-solid fa-arrow-up"></i>
+                18.4%
+            </small>
+
+        </div>
+
+        <div class="seller-chart">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     WHY ZENTRA
+===================================================== -->
+
+<section class="market-section">
+
+    <div class="text-center mb-5">
+
+        <h2 class="section-heading">
+            Everything you need in one marketplace
+        </h2>
+
+        <p class="section-subheading mx-auto">
+            Designed to make buying and selling simple, secure,
+            and effortless.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+
+            <div class="benefit-card">
+
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <h5>Secure payments</h5>
+
+                <p>
+                    Your transactions are protected from
+                    checkout to delivery.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="benefit-card">
+
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+
+                <h5>Verified sellers</h5>
+
+                <p>
+                    Buy confidently from trusted marketplace sellers.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="benefit-card">
+
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+
+                <h5>Easy delivery</h5>
+
+                <p>
+                    Track your order from checkout to your doorstep.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="benefit-card">
+
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+
+                <h5>Customer support</h5>
+
+                <p>
+                    Get help whenever you need it.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     BOOTSTRAP JS
+===================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+
+<script>
+
+    /* =========================================
+       CATEGORY FILTER
+    ========================================= */
+
+    const categoryButtons =
+        document.querySelectorAll(".category-pill");
+
+    const products =
+        document.querySelectorAll(".product-item");
+
+
+    categoryButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            categoryButtons.forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+            button.classList.add("active");
+
+
+            const category =
+                button.textContent.trim().toLowerCase();
+
+
+            products.forEach(product => {
+
+                if (category === "all categories") {
+
+                    product.style.display = "";
+
+                } else {
+
+                    const productCategory =
+                        product.dataset.category;
+
+                    product.style.display =
+                        productCategory === category
+                            ? ""
+                            : "none";
+                }
+
+            });
+
+        });
+
+    });
+
+
+
+    /* =========================================
+       WISHLIST
+    ========================================= */
+
+    const wishlistButtons =
+        document.querySelectorAll(".wishlist-btn");
+
+
+    wishlistButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            button.classList.toggle("active");
+
+            const icon =
+                button.querySelector("i");
+
+            if (button.classList.contains("active")) {
+
+                icon.classList.remove("fa-regular");
+
+                icon.classList.add("fa-solid");
+
+            } else {
+
+                icon.classList.remove("fa-solid");
+
+                icon.classList.add("fa-regular");
+
+            }
+
+        });
+
+    });
+
+
+
+    /* =========================================
+       SEARCH
+    ========================================= */
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
+    searchInput.addEventListener("input", function () {
+
+        const searchValue =
+            this.value.toLowerCase().trim();
+
+
+        products.forEach(product => {
+
+            const name =
+                product.dataset.name.toLowerCase();
+
+            const category =
+                product.dataset.category.toLowerCase();
+
+
+            if (
+                name.includes(searchValue) ||
+                category.includes(searchValue)
+            ) {
+
+                product.style.display = "";
+
+            } else {
+
+                product.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zentra - Wishlist</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background: #f7f9fc;
+            color: #101828;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar-custom {
+            height: 72px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e9f2;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-container {
+            width: 100%;
+            max-width: 1350px;
+            margin: auto;
+            padding: 0 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #101828;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #6366f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 17px;
+        }
+
+        .search-wrapper {
+            width: 100%;
+            max-width: 640px;
+            position: relative;
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #718096;
+            font-size: 16px;
+        }
+
+        .search-input {
+            width: 100%;
+            height: 46px;
+            border: 1px solid #dce2ec;
+            border-radius: 10px;
+            padding: 0 18px 0 48px;
+            outline: none;
+            font-size: 15px;
+            color: #344054;
+            transition: 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 27px;
+        }
+
+        .nav-link-custom {
+            text-decoration: none;
+            color: #64748b;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-link-custom:hover {
+            color: #101828;
+        }
+
+        .nav-icon {
+            position: relative;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 19px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .nav-icon:hover {
+            background: #f1f3ff;
+            color: #6366f1;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -1px;
+            right: -2px;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #6366f1;
+            color: white;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .profile-img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page-container {
+            max-width: 1350px;
+            margin: auto;
+            padding: 38px 24px 80px;
+        }
+
+        .breadcrumb-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .breadcrumb-home {
+            color: #66809f;
+            text-decoration: none;
+        }
+
+        .breadcrumb-home:hover {
+            color: #6366f1;
+        }
+
+        .breadcrumb-arrow {
+            color: #a0aec0;
+            font-size: 12px;
+        }
+
+        .breadcrumb-current {
+            color: #101828;
+            font-weight: 500;
+        }
+
+        .page-title {
+            font-size: 29px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: -0.6px;
+        }
+
+        .page-subtitle {
+            color: #66809f;
+            font-size: 15px;
+            margin-bottom: 36px;
+        }
+
+        /* =========================
+           PRODUCT GRID
+        ========================= */
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #e1e7ef;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+        }
+
+        .product-image-wrapper {
+            height: 300px;
+            position: relative;
+            background: #e9e9ec;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.03);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: #ff3444;
+            color: white;
+            padding: 7px 11px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff3444;
+            font-size: 17px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .wishlist-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .wishlist-btn.active {
+            color: #ff3444;
+        }
+
+        .product-details {
+            padding: 18px 18px 16px;
+        }
+
+        .seller-name {
+            color: #66809f;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #101828;
+            line-height: 1.4;
+        }
+
+        .rating-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 19px;
+        }
+
+        .stars {
+            display: flex;
+            gap: 2px;
+            color: #f59e0b;
+            font-size: 14px;
+        }
+
+        .rating-number {
+            font-size: 14px;
+            color: #475467;
+        }
+
+        .review-count {
+            color: #66809f;
+        }
+
+        .bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price-area {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .current-price {
+            font-size: 21px;
+            font-weight: 700;
+            color: #101828;
+        }
+
+        .old-price {
+            font-size: 13px;
+            color: #8b98aa;
+            text-decoration: line-through;
+        }
+
+        .cart-btn {
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 10px;
+            background: #6366f1;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 16px;
+        }
+
+        .cart-btn:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+            border: 1px solid #e1e7ef;
+            border-radius: 15px;
+        }
+
+        .empty-icon {
+            width: 65px;
+            height: 65px;
+            margin: auto auto 20px;
+            border-radius: 50%;
+            background: #eef0ff;
+            color: #6366f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #667085;
+            margin-bottom: 22px;
+        }
+
+        .browse-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 20px;
+            background: #6366f1;
+            color: white;
+            border-radius: 9px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .browse-btn:hover {
+            background: #4f46e5;
+            color: white;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .custom-toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #101828;
+            color: white;
+            padding: 13px 18px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 9999;
+            font-size: 14px;
+        }
+
+        .custom-toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            color: #7c83ff;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+            .wishlist-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .search-wrapper {
+                max-width: 450px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-link-custom {
+                display: none;
+            }
+
+            .wishlist-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .search-wrapper {
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .navbar-custom {
+                height: auto;
+                padding: 12px 0;
+            }
+
+            .navbar-container {
+                padding: 0 15px;
+            }
+
+            .navbar-inner {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .search-wrapper {
+                order: 3;
+                max-width: 100%;
+            }
+
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-container {
+                padding: 25px 15px 60px;
+            }
+
+            .product-image-wrapper {
+                height: 320px;
+            }
+
+            .page-title {
+                font-size: 25px;
+            }
+
+            .nav-links {
+                margin-left: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar-custom">
+    <div class="navbar-container">
+
+        <div class="navbar-inner d-flex align-items-center justify-content-between gap-4">
+
+            <!-- Brand -->
+            <a href="#" class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <span>Zentra</span>
+            </a>
+
+            <!-- Search -->
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="search-input"
+                    placeholder="Search products, brands, and categories"
+                >
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-links">
+
+                <a href="#" class="nav-link-custom">
+                    Explore
+                </a>
+
+                <a href="#" class="nav-link-custom">
+                    Sell
+                </a>
+
+                <!-- Messages -->
+                <div class="nav-icon" title="Messages">
+                    <i class="fa-regular fa-comment"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+
+                <!-- Notifications -->
+                <div class="nav-icon" title="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                </div>
+
+                <!-- Cart -->
+                <div class="nav-icon" title="Cart" onclick="showToast('Opening your cart...')">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="notification-badge" id="cartCount">1</span>
+                </div>
+
+                <!-- Profile -->
+                <img
+                    class="profile-img"
+                    src="https://i.pravatar.cc/100?img=12"
+                    alt="Profile"
+                    title="Profile"
+                >
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<main class="page-container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-area">
+
+        <a href="#" class="breadcrumb-home">
+            Home
+        </a>
+
+        <span class="breadcrumb-arrow">
+            <i class="fa-solid fa-chevron-right"></i>
+        </span>
+
+        <span class="breadcrumb-current">
+            Wishlist
+        </span>
+
+    </div>
+
+
+    <!-- Page Heading -->
+
+    <h1 class="page-title">
+        Wishlist
+    </h1>
+
+    <p class="page-subtitle" id="wishlistCountText">
+        2 saved items
+    </p>
+
+
+    <!-- Product Grid -->
+
+    <div class="wishlist-grid" id="wishlistGrid">
+
+
+        <!-- =====================
+             PRODUCT 1
+        ====================== -->
+
+        <div class="product-card" data-product="Lumen M2 Mirrorless Camera">
+
+            <div class="product-image-wrapper">
+
+                <img
+                    src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=85"
+                    class="product-image"
+                    alt="Lumen M2 Mirrorless Camera"
+                >
+
+                <span class="discount-badge">
+                    Save $100
+                </span>
+
+                <button
+                    class="wishlist-btn active"
+                    onclick="removeWishlist(this)"
+                    title="Remove from wishlist"
+                >
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="product-details">
+
+                <div class="seller-name">
+                    Lumen Optics
+                </div>
+
+                <div class="product-name">
+                    Lumen M2 Mirrorless Camera
+                </div>
+
+                <div class="rating-row">
+
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+
+                    <span class="rating-number">
+                        4.9
+                    </span>
+
+                    <span class="review-count">
+                        (154)
+                    </span>
+
+                </div>
+
+
+                <div class="bottom-row">
+
+                    <div class="price-area">
+
+                        <span class="current-price">
+                            $899
+                        </span>
+
+                        <span class="old-price">
+                            $999
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="cart-btn"
+                        onclick="addToCart('Lumen M2 Mirrorless Camera')"
+                        title="Add to cart"
+                    >
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             PRODUCT 2
+        ====================== -->
+
+        <div class="product-card" data-product="Meridian Field Watch 38mm">
+
+            <div class="product-image-wrapper">
+
+                <img
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85"
+                    class="product-image"
+                    alt="Meridian Field Watch"
+                >
+
+                <button
+                    class="wishlist-btn active"
+                    onclick="removeWishlist(this)"
+                    title="Remove from wishlist"
+                >
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="product-details">
+
+                <div class="seller-name">
+                    Meridian Supply Co.
+                </div>
+
+                <div class="product-name">
+                    Meridian Field Watch 38mm
+                </div>
+
+                <div class="rating-row">
+
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+
+                    <span class="rating-number">
+                        4.6
+                    </span>
+
+                    <span class="review-count">
+                        (412)
+                    </span>
+
+                </div>
+
+
+                <div class="bottom-row">
+
+                    <div class="price-area">
+
+                        <span class="current-price">
+                            $189
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="cart-btn"
+                        onclick="addToCart('Meridian Field Watch 38mm')"
+                        title="Add to cart"
+                    >
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             PRODUCT 3
+        ====================== -->
+
+        <div class="product-card" data-product="Aurora ANC Headphones">
+
+            <div class="product-image-wrapper">
+
+                <img
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=85"
+                    class="product-image"
+                    alt="Aurora Headphones"
+                >
+
+                <span class="discount-badge">
+                    Save $70
+                </span>
+
+                <button
+                    class="wishlist-btn active"
+                    onclick="removeWishlist(this)"
+                    title="Remove from wishlist"
+                >
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="product-details">
+
+                <div class="seller-name">
+                    Northwave Audio
+                </div>
+
+                <div class="product-name">
+                    Aurora ANC Over-Ear Headphones
+                </div>
+
+                <div class="rating-row">
+
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+
+                    <span class="rating-number">
+                        4.8
+                    </span>
+
+                    <span class="review-count">
+                        (328)
+                    </span>
+
+                </div>
+
+
+                <div class="bottom-row">
+
+                    <div class="price-area">
+
+                        <span class="current-price">
+                            $249
+                        </span>
+
+                        <span class="old-price">
+                            $319
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="cart-btn"
+                        onclick="addToCart('Aurora ANC Over-Ear Headphones')"
+                        title="Add to cart"
+                    >
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             PRODUCT 4
+        ====================== -->
+
+        <div class="product-card" data-product="Atlas 14 Ultrabook">
+
+            <div class="product-image-wrapper">
+
+                <img
+                    src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=85"
+                    class="product-image"
+                    alt="Atlas Ultrabook"
+                >
+
+                <button
+                    class="wishlist-btn active"
+                    onclick="removeWishlist(this)"
+                    title="Remove from wishlist"
+                >
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="product-details">
+
+                <div class="seller-name">
+                    Foundry Goods
+                </div>
+
+                <div class="product-name">
+                    Atlas 14 Ultrabook
+                </div>
+
+                <div class="rating-row">
+
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+
+                    <span class="rating-number">
+                        4.7
+                    </span>
+
+                    <span class="review-count">
+                        (219)
+                    </span>
+
+                </div>
+
+
+                <div class="bottom-row">
+
+                    <div class="price-area">
+
+                        <span class="current-price">
+                            $1,299
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="cart-btn"
+                        onclick="addToCart('Atlas 14 Ultrabook')"
+                        title="Add to cart"
+                    >
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Empty wishlist -->
+
+    <div class="empty-state" id="emptyState">
+
+        <div class="empty-icon">
+            <i class="fa-regular fa-heart"></i>
+        </div>
+
+        <h3>
+            Your wishlist is empty
+        </h3>
+
+        <p>
+            Save products you love and come back to them later.
+        </p>
+
+        <a href="#" class="browse-btn">
+            Explore products
+        </a>
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     TOAST
+========================= -->
+
+<div class="custom-toast" id="toast">
+
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+
+    <span id="toastMessage">
+        Added to cart
+    </span>
+
+</div>
+
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+
+    /* =========================
+       VARIABLES
+    ========================= */
+
+    let wishlistCount = 4;
+    let cartCount = 1;
+
+
+    /* =========================
+       REMOVE FROM WISHLIST
+    ========================= */
+
+    function removeWishlist(button) {
+
+        const card = button.closest(".product-card");
+        const productName = card.dataset.product;
+
+        card.style.transition = "all 0.25s ease";
+        card.style.opacity = "0";
+        card.style.transform = "scale(0.96)";
+
+        setTimeout(() => {
+
+            card.remove();
+
+            wishlistCount--;
+
+            updateWishlistCount();
+
+            showToast(productName + " removed from wishlist");
+
+            checkEmptyWishlist();
+
+        }, 250);
+    }
+
+
+    /* =========================
+       UPDATE WISHLIST COUNT
+    ========================= */
+
+    function updateWishlistCount() {
+
+        const text = document.getElementById("wishlistCountText");
+
+        if (wishlistCount === 1) {
+
+            text.textContent = "1 saved item";
+
+        } else {
+
+            text.textContent = wishlistCount + " saved items";
+
+        }
+    }
+
+
+    /* =========================
+       CHECK EMPTY
+    ========================= */
+
+    function checkEmptyWishlist() {
+
+        const grid = document.getElementById("wishlistGrid");
+        const emptyState = document.getElementById("emptyState");
+
+        if (grid.children.length === 0) {
+
+            grid.style.display = "none";
+            emptyState.style.display = "block";
+
+            document.getElementById("wishlistCountText").textContent =
+                "0 saved items";
+        }
+    }
+
+
+    /* =========================
+       ADD TO CART
+    ========================= */
+
+    function addToCart(productName) {
+
+        cartCount++;
+
+        document.getElementById("cartCount").textContent = cartCount;
+
+        showToast(productName + " added to cart");
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    const searchInput = document.getElementById("searchInput");
+
+    searchInput.addEventListener("input", function () {
+
+        const searchValue = this.value.toLowerCase().trim();
+
+        const products = document.querySelectorAll(".product-card");
+
+        products.forEach(product => {
+
+            const productName =
+                product.dataset.product.toLowerCase();
+
+            if (productName.includes(searchValue)) {
+
+                product.style.display = "";
+
+            } else {
+
+                product.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    let toastTimer;
+
+    function showToast(message) {
+
+        const toast = document.getElementById("toast");
+        const toastMessage = document.getElementById("toastMessage");
+
+        toastMessage.textContent = message;
+
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        }, 2500);
+    }
+
+
+    /* =========================
+       PROFILE CLICK
+    ========================= */
+
+    document.querySelector(".profile-img").addEventListener("click", function () {
+
+        showToast("Opening profile...");
+
+    });
+
+</script>
+
+</body>
+</html>

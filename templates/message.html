@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zentra - Messages</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f8fafc;
+            color: #111827;
+            font-family: "Inter", sans-serif;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            max-width: 1350px;
+            height: 100%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            padding: 0 25px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 21px;
+            font-weight: 700;
+            color: #172033;
+            text-decoration: none;
+            min-width: 200px;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background: #6366f1;
+            font-size: 17px;
+        }
+
+        /* Search */
+
+        .navbar-search {
+            flex: 1;
+            max-width: 640px;
+            position: relative;
+        }
+
+        .navbar-search i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+        }
+
+        .navbar-search input {
+            width: 100%;
+            height: 46px;
+            border: 1px solid #dbe2ea;
+            border-radius: 10px;
+            outline: none;
+            padding: 0 18px 0 48px;
+            font-size: 15px;
+            color: #334155;
+            transition: 0.2s;
+        }
+
+        .navbar-search input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.08);
+        }
+
+        /* Nav links */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-left: auto;
+        }
+
+        .nav-link-custom {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-link-custom:hover {
+            color: #6366f1;
+        }
+
+        /* Nav icons */
+
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        .nav-icon:hover {
+            background: #f1f3ff;
+            color: #6366f1;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            background: #6366f1;
+            color: white;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page-container {
+            max-width: 1350px;
+            margin: auto;
+            padding: 38px 25px 60px;
+        }
+
+        /* Breadcrumb */
+
+        .breadcrumb-custom {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .breadcrumb-custom a {
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .breadcrumb-custom a:hover {
+            color: #6366f1;
+        }
+
+        .breadcrumb-arrow {
+            color: #cbd5e1;
+        }
+
+        /* Heading */
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .page-subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        /* =========================
+           MESSAGE BOX
+        ========================= */
+
+        .messages-container {
+            background: white;
+            border: 1px solid #e1e7ef;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            height: 600px;
+            box-shadow: 0 2px 8px rgba(15,23,42,0.02);
+        }
+
+        /* =========================
+           CONVERSATIONS SIDEBAR
+        ========================= */
+
+        .conversation-sidebar {
+            width: 330px;
+            border-right: 1px solid #e5e7eb;
+            flex-shrink: 0;
+            background: #fff;
+        }
+
+        .conversation-search {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .conversation-search-box {
+            position: relative;
+        }
+
+        .conversation-search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+        }
+
+        .conversation-search-box input {
+            width: 100%;
+            height: 42px;
+            border: 1px solid #dbe2ea;
+            border-radius: 9px;
+            padding-left: 42px;
+            padding-right: 10px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .conversation-search-box input:focus {
+            border-color: #6366f1;
+        }
+
+        /* Conversation item */
+
+        .conversation-item {
+            display: flex;
+            gap: 12px;
+            padding: 16px 14px;
+            border-bottom: 1px solid #edf0f4;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .conversation-item:hover {
+            background: #f8f9ff;
+        }
+
+        .conversation-item.active {
+            background: #eef0ff;
+        }
+
+        .avatar-container {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .avatar {
+            width: 43px;
+            height: 43px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .online-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            border: 2px solid white;
+            border-radius: 50%;
+            bottom: 1px;
+            right: 0;
+        }
+
+        .conversation-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .conversation-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .conversation-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #172033;
+        }
+
+        .conversation-time {
+            font-size: 12px;
+            color: #64748b;
+            white-space: nowrap;
+        }
+
+        .conversation-preview {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.4;
+            margin-top: 4px;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .unread-count {
+            background: #6366f1;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* =========================
+           CHAT
+        ========================= */
+
+        .chat-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .chat-header {
+            height: 68px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 12px;
+        }
+
+        .chat-user-avatar {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .chat-user-name {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .chat-user-status {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .status-online {
+            color: #22c55e;
+        }
+
+        /* Chat messages */
+
+        .chat-body {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background: #fbfcfe;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message-row {
+            display: flex;
+        }
+
+        .message-row.received {
+            justify-content: flex-start;
+        }
+
+        .message-row.sent {
+            justify-content: flex-end;
+        }
+
+        .message {
+            max-width: 65%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message.received {
+            background: white;
+            border: 1px solid #e3e8ef;
+            color: #263244;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.sent {
+            background: #6366f1;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            display: block;
+            font-size: 10px;
+            margin-top: 5px;
+            opacity: 0.65;
+        }
+
+        /* Chat input */
+
+        .chat-input-area {
+            border-top: 1px solid #e5e7eb;
+            padding: 14px 18px;
+            background: white;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            height: 44px;
+            border: 1px solid #dbe2ea;
+            border-radius: 10px;
+            padding: 0 14px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .chat-input:focus {
+            border-color: #6366f1;
+        }
+
+        .chat-action {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 9px;
+            background: transparent;
+            color: #64748b;
+        }
+
+        .chat-action:hover {
+            background: #f1f3ff;
+            color: #6366f1;
+        }
+
+        .send-btn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 10px;
+            background: #6366f1;
+            color: white;
+        }
+
+        .send-btn:hover {
+            background: #4f46e5;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .navbar-container {
+                gap: 15px;
+            }
+
+            .brand {
+                min-width: auto;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .nav-link-custom {
+                display: none;
+            }
+
+            .conversation-sidebar {
+                width: 280px;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar-search {
+                display: none;
+            }
+
+            .brand {
+                flex: 1;
+            }
+
+            .page-container {
+                padding: 25px 12px;
+            }
+
+            .messages-container {
+                height: calc(100vh - 210px);
+            }
+
+            .conversation-sidebar {
+                width: 100%;
+            }
+
+            .chat-section {
+                display: none;
+            }
+
+            .messages-container.show-chat .conversation-sidebar {
+                display: none;
+            }
+
+            .messages-container.show-chat .chat-section {
+                display: flex;
+            }
+
+            .message {
+                max-width: 85%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="navbar-container">
+
+        <!-- Brand -->
+        <a href="#" class="brand">
+
+            <div class="brand-icon">
+                <i class="fas fa-store"></i>
+            </div>
+
+            Zentra
+
+        </a>
+
+        <!-- Search -->
+        <div class="navbar-search">
+
+            <i class="fas fa-search"></i>
+
+            <input
+                type="text"
+                placeholder="Search products, brands, and categories"
+            >
+
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-links">
+
+            <a href="#" class="nav-link-custom">
+                Explore
+            </a>
+
+            <a href="#" class="nav-link-custom">
+                Sell
+            </a>
+
+            <!-- Messages -->
+            <div class="nav-icon">
+
+                <a href="message.html"><i class="far fa-comment-dots"></i></a>
+
+                <span class="notification-badge">
+                    3
+                </span>
+
+            </div>
+
+            <!-- Notifications -->
+            <div class="nav-icon">
+
+                <i class="far fa-bell"></i>
+
+                <span class="notification-badge">
+                    2
+                </span>
+
+            </div>
+
+            <!-- Cart -->
+            <div class="nav-icon">
+
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+
+                <span class="notification-badge">
+                    1
+                </span>
+
+            </div>
+
+            <!-- Profile -->
+            <img
+                class="profile-image"
+                src="https://i.pravatar.cc/100?img=12"
+                alt="Profile"
+            >
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     PAGE
+========================= -->
+
+<main class="page-container">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb-custom">
+
+        <a href="#">
+            Home
+        </a>
+
+        <span class="breadcrumb-arrow">
+            <i class="fas fa-chevron-right fa-xs"></i>
+        </span>
+
+        <span>
+            Messages
+        </span>
+
+    </div>
+
+
+    <!-- Heading -->
+
+    <h1 class="page-title">
+        Messages
+    </h1>
+
+    <p class="page-subtitle">
+        Your conversations with sellers.
+    </p>
+
+
+    <!-- =========================
+         MESSAGES CONTAINER
+    ========================= -->
+
+    <div class="messages-container" id="messagesContainer">
+
+
+        <!-- =========================
+             LEFT SIDEBAR
+        ========================= -->
+
+        <aside class="conversation-sidebar">
+
+            <!-- Search conversations -->
+
+            <div class="conversation-search">
+
+                <div class="conversation-search-box">
+
+                    <i class="fas fa-search"></i>
+
+                    <input
+                        type="text"
+                        id="conversationSearch"
+                        placeholder="Search conversations"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Conversation 1 -->
+
+            <div
+                class="conversation-item active"
+                data-name="Northwave Audio"
+                onclick="selectConversation(this, 'Northwave Audio', 'Online now · Seller', 'https://i.pravatar.cc/100?img=11')"
+            >
+
+                <div class="avatar-container">
+
+                    <img
+                        class="avatar"
+                        src="https://i.pravatar.cc/100?img=11"
+                        alt=""
+                    >
+
+                    <span class="online-dot"></span>
+
+                </div>
+
+                <div class="conversation-content">
+
+                    <div class="conversation-top">
+
+                        <span class="conversation-name">
+                            Northwave Audio
+                        </span>
+
+                        <span class="conversation-time">
+                            09:42
+                        </span>
+
+                    </div>
+
+                    <div class="conversation-preview">
+                        If you order today it goes out on the 4pm courier run.
+                    </div>
+
+                </div>
+
+                <div class="unread-count">
+                    2
+                </div>
+
+            </div>
+
+
+            <!-- Conversation 2 -->
+
+            <div
+                class="conversation-item"
+                data-name="Kestrel Outfitters"
+                onclick="selectConversation(this, 'Kestrel Outfitters', 'Online · Seller', 'https://i.pravatar.cc/100?img=47')"
+            >
+
+                <div class="avatar-container">
+
+                    <img
+                        class="avatar"
+                        src="https://i.pravatar.cc/100?img=47"
+                        alt=""
+                    >
+
+                    <span class="online-dot"></span>
+
+                </div>
+
+                <div class="conversation-content">
+
+                    <div class="conversation-top">
+
+                        <span class="conversation-name">
+                            Kestrel Outfitters
+                        </span>
+
+                        <span class="conversation-time">
+                            Yesterday
+                        </span>
+
+                    </div>
+
+                    <div class="conversation-preview">
+                        Perfect, ordered a 10.5. Thanks!
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Conversation 3 -->
+
+            <div
+                class="conversation-item"
+                data-name="Foundry Goods"
+                onclick="selectConversation(this, 'Foundry Goods', 'Offline · Seller', 'https://i.pravatar.cc/100?img=32')"
+            >
+
+                <div class="avatar-container">
+
+                    <img
+                        class="avatar"
+                        src="https://i.pravatar.cc/100?img=32"
+                        alt=""
+                    >
+
+                </div>
+
+                <div class="conversation-content">
+
+                    <div class="conversation-top">
+
+                        <span class="conversation-name">
+                            Foundry Goods
+                        </span>
+
+                        <span class="conversation-time">
+                            Mon
+                        </span>
+
+                    </div>
+
+                    <div class="conversation-preview">
+                        Got it, thank you.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Conversation 4 -->
+
+            <div
+                class="conversation-item"
+                data-name="Lumen Optics"
+                onclick="selectConversation(this, 'Lumen Optics', 'Online · Seller', 'https://i.pravatar.cc/100?img=5')"
+            >
+
+                <div class="avatar-container">
+
+                    <img
+                        class="avatar"
+                        src="https://i.pravatar.cc/100?img=5"
+                        alt=""
+                    >
+
+                </div>
+
+                <div class="conversation-content">
+
+                    <div class="conversation-top">
+
+                        <span class="conversation-name">
+                            Lumen Optics
+                        </span>
+
+                        <span class="conversation-time">
+                            Sun
+                        </span>
+
+                    </div>
+
+                    <div class="conversation-preview">
+                        Yes — the official adapter supports autofocus on most lenses.
+                    </div>
+
+                </div>
+
+                <div class="unread-count">
+                    1
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             CHAT SECTION
+        ========================= -->
+
+        <section class="chat-section">
+
+            <!-- Chat Header -->
+
+            <div class="chat-header">
+
+                <img
+                    id="chatAvatar"
+                    class="chat-user-avatar"
+                    src="https://i.pravatar.cc/100?img=11"
+                    alt=""
+                >
+
+                <div>
+
+                    <div
+                        id="chatName"
+                        class="chat-user-name"
+                    >
+                        Northwave Audio
+                    </div>
+
+                    <div
+                        id="chatStatus"
+                        class="chat-user-status"
+                    >
+                        <span class="status-online">Online now</span>
+                        · Seller
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Chat Body -->
+
+            <div class="chat-body" id="chatBody">
+
+                <!-- User message -->
+
+                <div class="message-row sent">
+
+                    <div class="message sent">
+
+                        Hi! Does the Aurora headset come with a hard case?
+
+                        <span class="message-time">
+                            09:31
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Seller message -->
+
+                <div class="message-row received">
+
+                    <div class="message received">
+
+                        Hey Alex — yes, every unit ships with the moulded travel case and a USB-C cable.
+
+                        <span class="message-time">
+                            09:36
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Seller message -->
+
+                <div class="message-row received">
+
+                    <div class="message received">
+
+                        If you order today it goes out on the 4pm courier run.
+
+                        <span class="message-time">
+                            09:42
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Chat Input -->
+
+            <div class="chat-input-area">
+
+                <div class="chat-input-wrapper">
+
+                    <button class="chat-action">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+
+                    <input
+                        type="text"
+                        class="chat-input"
+                        id="messageInput"
+                        placeholder="Write a message..."
+                    >
+
+                    <button
+                        class="send-btn"
+                        onclick="sendMessage()"
+                    >
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<script>
+
+    /* =========================
+       SELECT CONVERSATION
+    ========================= */
+
+    function selectConversation(
+        element,
+        name,
+        status,
+        avatar
+    ) {
+
+        // Remove active state
+        document
+            .querySelectorAll(".conversation-item")
+            .forEach(item => {
+                item.classList.remove("active");
+            });
+
+        // Add active state
+        element.classList.add("active");
+
+        // Update chat header
+        document.getElementById("chatName").textContent = name;
+
+        document.getElementById("chatAvatar").src = avatar;
+
+        document.getElementById("chatStatus").textContent = status;
+
+        // Mobile
+        document
+            .getElementById("messagesContainer")
+            .classList.add("show-chat");
+    }
+
+
+    /* =========================
+       SEND MESSAGE
+    ========================= */
+
+    function sendMessage() {
+
+        const input =
+            document.getElementById("messageInput");
+
+        const message =
+            input.value.trim();
+
+        if (!message) {
+            return;
+        }
+
+        const chatBody =
+            document.getElementById("chatBody");
+
+        const messageRow =
+            document.createElement("div");
+
+        messageRow.className =
+            "message-row sent";
+
+        const messageElement =
+            document.createElement("div");
+
+        messageElement.className =
+            "message sent";
+
+        messageElement.innerHTML =
+            `
+                ${escapeHTML(message)}
+
+                <span class="message-time">
+                    Now
+                </span>
+            `;
+
+        messageRow.appendChild(messageElement);
+
+        chatBody.appendChild(messageRow);
+
+        input.value = "";
+
+        // Scroll to bottom
+        chatBody.scrollTop =
+            chatBody.scrollHeight;
+    }
+
+
+    /* =========================
+       ENTER TO SEND
+    ========================= */
+
+    document
+        .getElementById("messageInput")
+        .addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+
+        });
+
+
+    /* =========================
+       SEARCH CONVERSATIONS
+    ========================= */
+
+    document
+        .getElementById("conversationSearch")
+        .addEventListener("input", function() {
+
+            const search =
+                this.value.toLowerCase();
+
+            document
+                .querySelectorAll(".conversation-item")
+                .forEach(item => {
+
+                    const name =
+                        item
+                        .dataset
+                        .name
+                        .toLowerCase();
+
+                    if (name.includes(search)) {
+                        item.style.display = "flex";
+                    } else {
+                        item.style.display = "none";
+                    }
+
+                });
+
+        });
+
+
+    /* =========================
+       HTML ESCAPE
+    ========================= */
+
+    function escapeHTML(text) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent = text;
+
+        return div.innerHTML;
+    }
+
+</script>
+
+
+</body>
+</html>
