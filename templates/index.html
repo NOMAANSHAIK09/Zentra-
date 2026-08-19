@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -933,11 +934,11 @@ footer a:hover {
 
             <div class="d-flex gap-2">
 
-                <a href="login.html" class="btn login-btn">
+                <a href="{% url 'login' %}" class="btn login-btn">
                     Log in
                 </a>
 
-                <a href="signup.html" class="btn signup-btn">
+                <a href="{% url 'signup' %}" class="btn signup-btn">
                     Sign up
                 </a>
 
@@ -1231,7 +1232,7 @@ footer a:hover {
                     selling experience easier.
                 </p>
 
-                <a href="signup.html" class="btn primary-btn">
+                <a href="{% url 'signup' %}" class="btn primary-btn">
                     Join Zentra
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -1366,7 +1367,7 @@ footer a:hover {
 
             </div>
 
-            <a href="signup.html" class="btn seller-btn">
+            <a href="{% url 'signup' %}" class="btn seller-btn">
                 Start selling
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
@@ -1398,11 +1399,11 @@ footer a:hover {
 
         <div class="d-flex justify-content-center gap-3">
 
-            <a href="signup.html" class="btn primary-btn">
+            <a href="{% url 'signup' %}" class="btn primary-btn">
                 Create account
             </a>
 
-            <a href="login.html" class="btn secondary-btn">
+            <a href="{% url 'login' %}" class="btn secondary-btn">
                 Log in
             </a>
 
@@ -1453,7 +1454,7 @@ footer a:hover {
                     Features
                 </a>
 
-                <a href="signup.html">
+                <a href="{% url 'signup' %}">
                     Sign up
                 </a>
 
@@ -1464,11 +1465,11 @@ footer a:hover {
 
                 <h6>Account</h6>
 
-                <a href="login.html">
+                <a href="{% url 'login' %}">
                     Log in
                 </a>
 
-                <a href="signup.html">
+                <a href="{% url 'signup' %}">
                     Create account
                 </a>
 

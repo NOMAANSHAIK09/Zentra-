@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -537,7 +538,7 @@
                 </span>
 
                 <a
-                    href="signup.html"
+                    href="{% url 'signup' %}"
                     class="signup-link"
                 >
                     Sign up
@@ -586,7 +587,9 @@
 
         <!-- Form -->
 
-        <form id="loginForm">
+        <form id="loginForm" method="POST" action="{% url 'login' %}">
+
+            {% csrf_token %}
 
 
             <!-- Email -->
@@ -609,6 +612,7 @@
                     <input
                         type="email"
                         id="email"
+                        name="email"
                         class="form-control"
                         placeholder="you@example.com"
                         required
@@ -640,13 +644,14 @@
                     <input
                         type="password"
                         id="password"
+                        name="password"
                         class="form-control password-input"
                         placeholder="Enter your password"
                         required
                     >
 
                     <button
-                        type="button"
+                        type="submit"
                         class="password-toggle"
                         onclick="togglePassword()"
                     >
@@ -745,7 +750,7 @@
 
             Don't have a Zentra account?
 
-            <a href="signup.html">
+            <a href="{% url 'signup' %}">
                 Create one
             </a>
 
@@ -774,7 +779,7 @@
      JAVASCRIPT
 ========================== -->
 
-<script>
+<!-- <script>
 
 
     /* =========================
@@ -922,7 +927,7 @@
 
     }
 
-</script>
+</script> -->
 
 
 </body>
