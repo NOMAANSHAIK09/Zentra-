@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -762,7 +763,7 @@
 
             <!-- Messages -->
 
-            <a href="message.html" class="nav-icon">
+            <a href="{% url 'message' %}" class="nav-icon">
 
                 <i class="far fa-comment-alt"></i>
 
@@ -788,7 +789,7 @@
 
             <!-- Cart -->
 
-            <a href="cart.html" class="nav-icon">
+            <a href="{% url 'cart' %}" class="nav-icon">
 
                 <i class="fas fa-shopping-cart"></i>
 
@@ -816,24 +817,24 @@
                     id="profileDropdown"
                 >
 
-                    <a href="profile.html">
+                    <a href="{% url 'profile' %}">
                         <i class="far fa-user"></i>
                         Profile
                     </a>
 
-                    <a href="myorder.html">
+                    <a href="{% url 'myorder' %}">
                         <i class="fas fa-box"></i>
                         Orders
                     </a>
 
-                    <a href="settings.html">
+                    <a href="#">
                         <i class="fas fa-cog"></i>
                         Settings
                     </a>
 
                     <hr class="my-1">
 
-                    <a href="login.html" class="text-danger">
+                    <a href="{% url 'logout' %}" class="text-danger" action="">
                         <i class="fas fa-sign-out-alt"></i>
                         Logout
                     </a>
@@ -866,7 +867,7 @@
             <ol class="breadcrumb mb-0">
 
                 <li class="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="{% url 'home' %}">Home</a>
                 </li>
 
                 <li class="breadcrumb-item active">
@@ -880,11 +881,10 @@
     </div>
 
 
-
+{% if user.is_authenticated %}
     <!-- =================================================
          PROFILE HEADER
     ================================================== -->
-
     <section class="profile-card">
 
         <div class="profile-info">
@@ -899,7 +899,7 @@
             <div>
 
                 <h1 class="profile-name">
-                    Alex Mercer
+                    {{ user.profile.full_name }}
                 </h1>
 
 
@@ -907,7 +907,7 @@
 
                     <i class="far fa-envelope"></i>
 
-                    alex.mercer@zentra.app
+                    {{ user.profile.email }}
 
                 </div>
 
@@ -916,9 +916,17 @@
 
                     <i class="fas fa-map-marker-alt"></i>
 
-                    San Francisco, CA · Member since March 2024
+                    {{ user.profile.address }}
 
                 </div>
+
+                <!-- <div class="profile-detail">
+
+                    <i class="fas fa-phone"></i>
+
+                    {{ user.phone }}
+
+                </div> -->
 
             </div>
 
@@ -932,6 +940,7 @@
         </div>
 
     </section>
+{% endif %}
 
 
 
@@ -1346,7 +1355,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-<script>
+ <script>
 
     /* ==========================================
        PROFILE DROPDOWN
@@ -1456,7 +1465,7 @@
 
     });
 
-</script>
+</script> 
 
 </body>
 </html>

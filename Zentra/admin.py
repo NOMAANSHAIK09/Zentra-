@@ -1,6 +1,5 @@
 from django.contrib import admin
-from Zentra.models import userinfo
+from .models import Profile
 
-# Register your models here.
 
-admin.site.register(userinfo)
+admin.site.register(Profile)

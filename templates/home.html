@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1342,7 +1343,7 @@
             <!-- Messages -->
             <div class="nav-icon">
 
-                <a href="message.html"><i class="fa-regular fa-comment"></i></a>
+                <a href="{% url 'message' %}"><i class="fa-regular fa-comment"></i></a>
 
                 <span class="notification-count">
                     3
@@ -1366,13 +1367,13 @@
             <!-- Cart -->
             <div class="nav-icon">
 
-                <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
 
             </div>
 
 
             <!-- Profile -->
-         <a href="profile.html">   <img
+         <a href="{% url 'profile' %}">   <img
                 class="profile-avatar"
                 src="https://i.pravatar.cc/100?img=12"
                 alt="Profile"
@@ -1389,7 +1390,7 @@
 <!-- =====================================================
      MAIN
 ===================================================== -->
-
+{% if user.is_authenticated %}
 <main class="main-container">
 
 
@@ -1400,7 +1401,7 @@
     <section class="welcome-card">
 
         <h1 class="welcome-title">
-            Welcome back, Alex
+            Welcome back, {{ user.profile.full_name }}
         </h1>
 
         <p class="welcome-text">
@@ -1422,7 +1423,7 @@
 
     </section>
 
-
+{% endif %}
 
     <!-- =================================================
          CATEGORIES
@@ -2441,7 +2442,6 @@
 </script>
 
 
-
 <script>
 
     /* =========================================
@@ -2572,7 +2572,7 @@
 
     });
 
-</script>
+</script> 
 
 </body>
 </html>
